@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UTSAV — India's $130B (₹11 Lakh Crore) Event Platform | Investor Overview</title>
+  <meta name="description" content="UTSAV is India's SaaS-enabled event booking and milestone escrow platform — connecting 1.2 Crore annual weddings with verified vendors across an 8-module Vendor OS, admin verification desk, and customer discovery engine." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ─────────────────────────────────── */
+    :root {
+      --bg:        #06090F;
+      --bg-2:      #0A1020;
+      --bg-3:      #0F1A30;
+      --bg-card:   #111C35;
+      --gold:      #E8A020;
+      --gold-b:    #F5B940;
+      --gold-d:    #B07010;
+      --gold-glow: rgba(232,160,32,0.18);
+      --emerald:   #22C55E;
+      --rose:      #F43F5E;
+      --blue:      #3B82F6;
+      --text:      #F0F2FF;
+      --text-2:    rgba(240,242,255,0.60);
+      --text-3:    rgba(240,242,255,0.35);
+      --border:    rgba(232,160,32,0.14);
+      --border-2:  rgba(255,255,255,0.07);
+      --r:         20px;
+      --r-sm:      12px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.65}
+    ::-webkit-scrollbar{width:4px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--gold-d);border-radius:2px}
+    img{display:block;max-width:100%}
+    a{text-decoration:none;color:inherit}
+
+    /* ── NAV ─────────────────────────────────────── */
+    #nav{
+      position:fixed;top:0;left:0;right:0;z-index:900;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:20px 64px;
+      transition:all .3s;
+    }
+    #nav.stuck{
+      background:rgba(6,9,15,.92);
+      backdrop-filter:blur(24px);
+      border-bottom:1px solid var(--border);
+      padding:14px 64px;
+    }
+    .logo{
+      font-family:'Playfair Display',serif;
+      font-size:1.55rem;font-weight:800;
+      letter-spacing:3px;color:var(--text);
+    }
+    .logo em{color:var(--gold);font-style:normal}
+    .nav-menu{display:flex;align-items:center;gap:40px;list-style:none}
+    .nav-menu a{font-size:.875rem;font-weight:500;color:var(--text-2);transition:color .2s}
+    .nav-menu a:hover{color:var(--gold)}
+    .btn-nav{
+      background:linear-gradient(135deg,var(--gold-b),var(--gold));
+      color:var(--bg);padding:10px 26px;border-radius:50px;
+      font-weight:700;font-size:.85rem;
+      transition:transform .2s,box-shadow .2s;
+    }
+    .btn-nav:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,160,32,.35)}
+
+    /* ── HERO ─────────────────────────────────────── */
+    #hero{
+      min-height:100vh;display:flex;align-items:center;
+      padding:140px 64px 80px;position:relative;overflow:hidden;
+    }
+    .hero-glow{
+      position:absolute;inset:0;pointer-events:none;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(232,160,32,.10) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(59,130,246,.07) 0%, transparent 50%);
+    }
+    #particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .p{
+      position:absolute;border-radius:50%;
+      background:var(--gold);
+      animation:rise linear infinite;
+      opacity:0;
+    }
+    @keyframes rise{
+      0%{transform:translateY(100vh);opacity:0}
+      8%{opacity:.5}
+      92%{opacity:.2}
+      100%{transform:translateY(-20px);opacity:0}
+    }
+    .hero-inner{
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:80px;align-items:center;
+      max-width:1240px;margin:0 auto;width:100%;
+      position:relative;z-index:2;
+    }
+    .hero-text{}
+    .chip{
+      display:inline-flex;align-items:center;gap:8px;
+      background:rgba(232,160,32,.10);
+      border:1px solid rgba(232,160,32,.25);
+      border-radius:50px;padding:7px 18px;
+      font-size:.75rem;font-weight:700;
+      color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;
+      margin-bottom:28px;
+    }
+    .chip::before{content:'●';animation:blink 2s ease infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+    h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.6rem,5vw,4.2rem);
+      font-weight:800;line-height:1.1;letter-spacing:-1px;
+      margin-bottom:22px;
+    }
+    .gold-text{
+      background:linear-gradient(135deg,var(--gold-b),var(--gold));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .hero-desc{
+      font-size:1.05rem;color:var(--text-2);
+      max-width:520px;margin-bottom:44px;line-height:1.75;
+    }
+    .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+    .btn-gold{
+      background:linear-gradient(135deg,var(--gold-b),var(--gold));
+      color:var(--bg);padding:16px 36px;border-radius:50px;
+      font-weight:700;font-size:1rem;
+      display:inline-flex;align-items:center;gap:8px;
+      transition:transform .2s,box-shadow .2s;
+    }
+    .btn-gold:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(232,160,32,.4)}
+    .btn-ghost{
+      border:1px solid var(--border);
+      padding:16px 36px;border-radius:50px;
+      font-weight:600;font-size:1rem;color:var(--text);
+      background:rgba(255,255,255,.03);
+      backdrop-filter:blur(8px);
+      display:inline-flex;align-items:center;gap:8px;
+      transition:all .2s;
+    }
+    .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+    .hero-stats-bar{
+      display:flex;gap:0;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      border-radius:var(--r);
+      backdrop-filter:blur(16px);
+      margin-top:52px;overflow:hidden;
+    }
+    .hs{
+      flex:1;padding:20px 24px;text-align:center;
+      border-right:1px solid var(--border-2);
+    }
+    .hs:last-child{border-right:none}
+    .hs-val{
+      font-family:'Playfair Display',serif;
+      font-size:1.5rem;font-weight:700;
+      color:var(--gold);display:block;line-height:1;margin-bottom:4px;
+    }
+    .hs-lbl{font-size:.7rem;color:var(--text-3);text-transform:uppercase;letter-spacing:1px}
+    .hero-img{position:relative;display:flex;justify-content:center}
+    .hero-img img{
+      width:85%;max-width:460px;
+      filter:drop-shadow(0 40px 80px rgba(0,0,0,.8)) drop-shadow(0 0 60px rgba(232,160,32,.15));
+      transition:transform .4s ease;
+    }
+    .hero-img img:hover{transform:translateY(-8px) scale(1.01)}
+    .float-badge{
+      position:absolute;
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:var(--r-sm);
+      padding:12px 18px;
+      backdrop-filter:blur(20px);
+      font-size:.8rem;font-weight:600;
+      display:flex;align-items:center;gap:8px;
+      box-shadow:0 16px 40px rgba(0,0,0,.5);
+    }
+    .fb-1{top:10%;left:-5%;animation:float1 4s ease-in-out infinite}
+    .fb-2{bottom:20%;right:-5%;animation:float1 4s ease-in-out infinite .8s}
+    .fb-3{top:50%;left:-12%;animation:float1 4s ease-in-out infinite 1.6s}
+    @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    .fb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+    .dot-green{background:#22C55E;box-shadow:0 0 8px #22C55E}
+    .dot-gold{background:var(--gold);box-shadow:0 0 8px var(--gold)}
+    .dot-blue{background:#3B82F6;box-shadow:0 0 8px #3B82F6}
+
+    /* ── SECTION BASE ────────────────────────────── */
+    section{padding:100px 64px}
+    .container{max-width:1240px;margin:0 auto}
+    .sec-badge{
+      display:inline-block;
+      background:rgba(232,160,32,.10);
+      border:1px solid rgba(232,160,32,.2);
+      color:var(--gold);border-radius:50px;
+      padding:6px 18px;font-size:.7rem;font-weight:700;
+      letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;
+    }
+    .sec-h{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.9rem,3.5vw,2.8rem);
+      font-weight:700;line-height:1.2;margin-bottom:14px;
+    }
+    .sec-sub{color:var(--text-2);font-size:1rem;line-height:1.7;max-width:560px}
+    .sec-header{text-align:center;margin-bottom:72px}
+    .sec-header .sec-sub{margin:0 auto}
+
+    /* ── REVEAL ──────────────────────────────────── */
+    .rv,.rv-l,.rv-r{opacity:0;transition:opacity .7s ease,transform .7s ease}
+    .rv{transform:translateY(36px)}
+    .rv-l{transform:translateX(-36px)}
+    .rv-r{transform:translateX(36px)}
+    .rv.on,.rv-l.on,.rv-r.on{opacity:1;transform:none}
+
+    /* ── SOCIAL PROOF ────────────────────────────── */
+    #proof{
+      background:var(--bg-2);
+      padding:0;border-top:1px solid var(--border-2);
+      border-bottom:1px solid var(--border-2);
+    }
+    .proof-strip{
+      max-width:1240px;margin:0 auto;
+      padding:28px 64px;
+      display:flex;align-items:center;gap:64px;
+      overflow:hidden;
+    }
+    .proof-lbl{
+      font-size:.75rem;font-weight:600;color:var(--text-3);
+      text-transform:uppercase;letter-spacing:1.5px;white-space:nowrap;
+    }
+    .proof-items{
+      display:flex;gap:48px;align-items:center;
+      animation:marquee 24s linear infinite;
+      white-space:nowrap;
+    }
+    @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .proof-item{
+      font-size:.9rem;font-weight:700;color:var(--text-2);
+      display:flex;align-items:center;gap:10px;
+    }
+    .proof-item span{color:var(--gold);font-size:1rem}
+
+    /* ── PROBLEM ─────────────────────────────────── */
+    #problem{background:var(--bg)}
+    .prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .prob-card{
+      background:var(--bg-2);
+      border:1px solid var(--border-2);
+      border-radius:var(--r);
+      padding:36px 32px;
+      position:relative;overflow:hidden;
+      transition:border-color .3s,transform .3s;
+    }
+    .prob-card:hover{border-color:var(--border);transform:translateY(-4px)}
+    .prob-card::after{
+      content:'';
+      position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      opacity:0;transition:opacity .3s;
+    }
+    .prob-card:hover::after{opacity:1}
+    .prob-icon{font-size:2.4rem;margin-bottom:20px}
+    .prob-card h3{font-size:1.1rem;font-weight:700;margin-bottom:10px}
+    .prob-card p{color:var(--text-2);font-size:.9rem;line-height:1.65}
+    .prob-stat{
+      display:inline-flex;align-items:center;gap:6px;
+      margin-top:18px;padding:5px 14px;
+      background:rgba(232,160,32,.08);border:1px solid var(--border);
+      border-radius:50px;font-size:.8rem;font-weight:600;color:var(--gold);
+    }
+    .prob-src{font-size:.7rem;color:var(--text-3);margin-top:6px}
+
+    /* ── WHY NOW ─────────────────────────────────── */
+    #whynow{background:var(--bg-2)}
+    .wnow-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+    .wnow-card{
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:var(--r);padding:36px 32px;
+      display:flex;gap:22px;
+    }
+    .wnow-num{
+      font-family:'Playfair Display',serif;
+      font-size:3rem;font-weight:800;
+      color:rgba(232,160,32,.15);line-height:1;
+      flex-shrink:0;
+      width:52px;
+    }
+    .wnow-card h3{font-size:1rem;font-weight:700;margin-bottom:8px}
+    .wnow-card p{color:var(--text-2);font-size:.875rem;line-height:1.65}
+    .wnow-card .tag{
+      display:inline-block;margin-top:12px;
+      font-size:.75rem;font-weight:700;color:var(--emerald);
+      background:rgba(34,197,94,.08);
+      padding:3px 12px;border-radius:50px;
+    }
+
+    /* ── PRODUCT ─────────────────────────────────── */
+    #product{background:var(--bg)}
+    .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:56px}
+    .tab{
+      padding:11px 28px;border-radius:50px;
+      border:1px solid var(--border-2);
+      background:transparent;color:var(--text-2);
+      font-family:'Inter',sans-serif;font-size:.875rem;font-weight:600;
+      cursor:pointer;transition:all .25s;
+    }
+    .tab.active{
+      background:linear-gradient(135deg,var(--gold-b),var(--gold));
+      border-color:transparent;color:var(--bg);
+    }
+    .panel{display:none}
+    .panel.active{
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:60px;align-items:center;
+    }
+    .phones{display:flex;gap:20px;align-items:flex-end;justify-content:center}
+    .ph{flex-shrink:0;transition:transform .35s}
+    .ph:hover{transform:translateY(-10px) rotate(-1deg)}
+    .ph img{
+      border-radius:24px;
+      box-shadow:0 24px 72px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.05);
+    }
+    .ph.main img{width:210px}
+    .ph.side img{width:170px;margin-bottom:20px;opacity:.8}
+    .prod-info h3{
+      font-family:'Playfair Display',serif;
+      font-size:2rem;font-weight:700;margin-bottom:14px;
+    }
+    .prod-info p{color:var(--text-2);font-size:.975rem;line-height:1.75;margin-bottom:28px}
+    .feat-list{display:flex;flex-direction:column;gap:12px}
+    .feat{
+      display:flex;align-items:center;gap:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--border-2);
+      border-radius:var(--r-sm);padding:14px 18px;
+      font-size:.875rem;
+      transition:border-color .2s;
+    }
+    .feat:hover{border-color:var(--border)}
+    .feat-icon{font-size:1.1rem;flex-shrink:0}
+    .feat-tag{
+      margin-left:auto;font-size:.7rem;font-weight:700;
+      background:rgba(232,160,32,.10);color:var(--gold);
+      padding:2px 10px;border-radius:50px;white-space:nowrap;
+    }
+
+    /* ── MARKET ──────────────────────────────────── */
+    #market{background:var(--bg-2)}
+    .market-split{
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:72px;align-items:center;margin-top:72px;
+    }
+    .market-chart-wrap img{
+      width:100%;border-radius:var(--r);
+      box-shadow:0 24px 60px rgba(0,0,0,.5);
+      border:1px solid var(--border);
+    }
+    .market-source{font-size:.7rem;color:var(--text-3);margin-top:8px;text-align:center}
+    .market-right{}
+    .mstat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+    .mstat{
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:var(--r-sm);padding:24px 20px;
+      text-align:center;
+    }
+    .mstat-val{
+      font-family:'Playfair Display',serif;
+      font-size:1.75rem;font-weight:700;
+      color:var(--gold);margin-bottom:4px;display:block;
+    }
+    .mstat-lbl{font-size:.75rem;color:var(--text-2)}
+    .tam-stack{display:flex;flex-direction:column;gap:12px}
+    .tam-row{
+      display:flex;align-items:center;gap:14px;
+      background:var(--bg-card);
+      border:1px solid var(--border-2);
+      border-radius:var(--r-sm);padding:16px 20px;
+      transition:border-color .2s;
+    }
+    .tam-row:hover{border-color:var(--border)}
+    .tam-label{font-size:.7rem;font-weight:700;color:var(--text-3);
+      width:36px;text-align:center;text-transform:uppercase;letter-spacing:1px}
+    .tam-bar-wrap{flex:1;background:var(--border-2);border-radius:4px;height:8px}
+    .tam-bar{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--gold-d),var(--gold-b))}
+    .tam-val{font-size:.875rem;font-weight:700;color:var(--text);white-space:nowrap;min-width:80px;text-align:right}
+
+    /* ── BUSINESS MODEL ──────────────────────────── */
+    #biz{background:var(--bg)}
+    .biz-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:24px}
+    .biz-card{
+      background:var(--bg-2);
+      border:1px solid var(--border-2);
+      border-radius:var(--r);padding:40px 32px;
+      position:relative;overflow:hidden;
+      transition:transform .3s,box-shadow .3s,border-color .3s;
+    }
+    .biz-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 24px 48px rgba(0,0,0,.4),0 0 0 1px var(--border);
+    }
+    .biz-n{
+      position:absolute;top:16px;right:20px;
+      font-family:'Playfair Display',serif;
+      font-size:5rem;font-weight:800;line-height:1;
+      color:rgba(232,160,32,.05);
+    }
+    .biz-icon{font-size:2.4rem;margin-bottom:20px}
+    .biz-card h3{font-size:1.05rem;font-weight:700;margin-bottom:10px}
+    .biz-card p{color:var(--text-2);font-size:.875rem;line-height:1.65;margin-bottom:20px}
+    .biz-rate{
+      background:rgba(232,160,32,.10);
+      border:1px solid var(--border);
+      border-radius:50px;padding:8px 20px;
+      font-size:.875rem;font-weight:700;color:var(--gold);
+      display:inline-block;
+    }
+    .biz-note{
+      font-size:.75rem;color:var(--text-3);margin-top:8px;
+    }
+    .unit-econ{
+      margin-top:56px;
+      background:var(--bg-2);
+      border:1px solid var(--border);
+      border-radius:var(--r);
+      padding:40px 48px;
+      display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    }
+    .ue{
+      text-align:center;
+      padding:0 24px;
+      border-right:1px solid var(--border-2);
+    }
+    .ue:last-child{border-right:none}
+    .ue-val{
+      font-family:'Playfair Display',serif;
+      font-size:2rem;font-weight:700;
+      color:var(--gold);display:block;margin-bottom:4px;
+    }
+    .ue-lbl{font-size:.75rem;color:var(--text-2)}
+
+    /* ── COMPETITIVE ─────────────────────────────── */
+    #comp{background:var(--bg-2)}
+    .ctbl-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--border-2)}
+    .ctbl{
+      width:100%;border-collapse:collapse;
+      font-size:.9rem;min-width:640px;
+    }
+    .ctbl th{
+      padding:18px 24px;font-size:.75rem;font-weight:700;
+      letter-spacing:1.5px;text-transform:uppercase;
+    }
+    .ctbl th:first-child{text-align:left;padding-left:32px}
+    .ctbl th:not(:first-child){text-align:center}
+    .th-normal{background:var(--bg-3);color:var(--text-3)}
+    .th-us{background:rgba(232,160,32,.12);color:var(--gold);border-top:2px solid var(--gold)}
+    .ctbl td{
+      padding:16px 24px;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+    .ctbl td:first-child{
+      text-align:left;padding-left:32px;
+      font-weight:500;color:var(--text-2);font-size:.875rem;
+    }
+    .ctbl td:not(:first-child){text-align:center}
+    .ctbl td.td-us{background:rgba(232,160,32,.04)}
+    .ctbl tr:last-child td{border-bottom:none}
+    .ctbl tr:hover td{background:rgba(255,255,255,.015)}
+    .ctbl tr:hover td.td-us{background:rgba(232,160,32,.07)}
+    .ck{color:#22C55E;font-size:1.1rem}
+    .cx{color:#F43F5E;font-size:1.1rem}
+    .cp{color:var(--gold)}
+    .comp-note{
+      margin-top:28px;padding:16px 24px;
+      background:rgba(34,197,94,.06);
+      border:1px solid rgba(34,197,94,.15);
+      border-radius:var(--r-sm);
+      font-size:.85rem;color:var(--text-2);
+    }
+    .comp-note strong{color:var(--emerald)}
+
+    /* ── ROADMAP ─────────────────────────────────── */
+    #roadmap{background:var(--bg)}
+    .rm-grid{
+      display:grid;grid-template-columns:repeat(4,1fr);
+      gap:20px;position:relative;
+    }
+    .rm-grid::before{
+      content:'';
+      position:absolute;top:28px;left:12.5%;right:12.5%;
+      height:1px;
+      background:linear-gradient(90deg,var(--gold-d),var(--gold-b),var(--gold-d));
+    }
+    .rm-item{padding:0 8px}
+    .rm-dot{
+      width:20px;height:20px;border-radius:50%;
+      border:2px solid var(--gold-d);
+      background:var(--bg);
+      margin:0 auto 28px;
+      position:relative;z-index:1;
+      transition:all .3s;
+    }
+    .rm-dot.now{
+      background:var(--gold);
+      box-shadow:0 0 0 5px rgba(232,160,32,.2);
+      border-color:var(--gold-b);
+    }
+    .rm-card{
+      background:var(--bg-2);
+      border:1px solid var(--border-2);
+      border-radius:var(--r-sm);padding:24px 20px;
+      transition:border-color .3s,transform .3s;
+    }
+    .rm-card:hover{border-color:var(--border);transform:translateY(-4px)}
+    .rm-q{
+      font-size:.68rem;font-weight:700;letter-spacing:2px;
+      text-transform:uppercase;color:var(--gold);margin-bottom:8px;
+    }
+    .rm-card h4{font-size:.95rem;font-weight:700;margin-bottom:12px}
+    .rm-card ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+    .rm-card li{
+      font-size:.8rem;color:var(--text-2);
+      display:flex;align-items:baseline;gap:6px;
+    }
+    .rm-card li::before{content:'→';color:var(--gold);font-size:.65rem;flex-shrink:0}
+    .rm-milestone{
+      display:inline-block;margin-top:14px;
+      font-size:.72rem;font-weight:700;
+      background:rgba(232,160,32,.10);color:var(--gold);
+      padding:3px 12px;border-radius:50px;
+    }
+
+    /* ── TEAM ────────────────────────────────────── */
+    #team{background:var(--bg-2)}
+    .team-wrap{
+      display:flex;gap:28px;justify-content:center;
+      max-width:900px;margin:0 auto;
+    }
+    .team-card{
+      flex:1;max-width:400px;
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:var(--r);padding:44px 36px;
+      text-align:center;
+      transition:transform .3s,box-shadow .3s;
+    }
+    .team-card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 24px 48px rgba(0,0,0,.4),0 0 30px var(--gold-glow);
+    }
+    .av{
+      width:90px;height:90px;border-radius:50%;
+      background:linear-gradient(135deg,var(--gold-d),var(--gold-b));
+      margin:0 auto 22px;
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Playfair Display',serif;
+      font-size:2.2rem;font-weight:700;
+      color:var(--bg);
+      box-shadow:0 0 0 4px rgba(232,160,32,.18);
+    }
+    .team-card h3{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+    .team-role{
+      font-size:.75rem;font-weight:700;letter-spacing:1.5px;
+      text-transform:uppercase;color:var(--gold);margin-bottom:16px;
+    }
+    .team-card p{color:var(--text-2);font-size:.875rem;line-height:1.65}
+
+    /* ── ASK ─────────────────────────────────────── */
+    #ask{background:var(--bg)}
+    .ask-inner{
+      max-width:980px;margin:0 auto;
+      display:grid;grid-template-columns:1fr 1fr;gap:64px;
+      align-items:center;
+    }
+    .ask-left h2{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2rem,3.5vw,3rem);font-weight:700;
+      margin-bottom:16px;line-height:1.15;
+    }
+    .ask-left p{color:var(--text-2);font-size:.975rem;line-height:1.7}
+    .ask-cards{display:flex;flex-direction:column;gap:16px}
+    .ask-card{
+      background:var(--bg-2);
+      border:1px solid var(--border);
+      border-radius:var(--r-sm);padding:22px 24px;
+      display:flex;gap:16px;align-items:flex-start;
+    }
+    .ask-icon{font-size:1.5rem;flex-shrink:0}
+    .ask-card h4{font-size:.95rem;font-weight:700;margin-bottom:4px}
+    .ask-card p{font-size:.825rem;color:var(--text-2);line-height:1.5}
+
+    /* ── CTA ─────────────────────────────────────── */
+    #cta{background:var(--bg-2);text-align:center;position:relative;overflow:hidden}
+    #cta::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(232,160,32,.07),transparent);
+    }
+    .cta-box{
+      position:relative;z-index:1;
+      max-width:760px;margin:0 auto;
+      background:var(--bg-card);
+      border:1px solid var(--border);
+      border-radius:28px;padding:72px 64px;
+    }
+    .cta-box h2{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(1.8rem,3.5vw,2.8rem);
+      font-weight:700;margin-bottom:14px;line-height:1.2;
+    }
+    .cta-box p{color:var(--text-2);font-size:1rem;margin-bottom:40px;line-height:1.65}
+    .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer{
+      background:var(--bg);
+      border-top:1px solid var(--border-2);
+      padding:36px 64px;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    footer p{font-size:.8rem;color:var(--text-3)}
+    .f-links{display:flex;gap:24px}
+    .f-links a{font-size:.8rem;color:var(--text-3);transition:color .2s}
+    .f-links a:hover{color:var(--gold)}
+    .disclaimer{
+      text-align:center;
+      padding:16px 64px;
+      font-size:.72rem;color:var(--text-3);
+      background:var(--bg);
+      border-top:1px solid var(--border-2);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media(max-width:1024px){
+      section{padding:80px 32px}
+      #hero{padding:120px 32px 60px}
+      #nav,#nav.stuck{padding:16px 32px}
+      .hero-inner{grid-template-columns:1fr;gap:52px}
+      .hero-img{display:none}
+      .hero-stats-bar{flex-wrap:wrap}
+      .market-split{grid-template-columns:1fr;gap:40px}
+      .panel.active{grid-template-columns:1fr;gap:36px}
+      .phones{justify-content:center}
+      .ask-inner{grid-template-columns:1fr;gap:40px}
+      .proof-strip{padding:20px 32px;gap:32px}
+      footer{flex-direction:column;gap:16px;text-align:center}
+      .disclaimer{padding:16px 32px}
+    }
+    @media(max-width:760px){
+      .prob-grid{grid-template-columns:1fr}
+      .wnow-grid{grid-template-columns:1fr}
+      .biz-grid{grid-template-columns:1fr}
+      .mstat-grid{grid-template-columns:1fr 1fr}
+      .rm-grid{grid-template-columns:1fr 1fr}
+      .rm-grid::before{display:none}
+      .team-wrap{flex-direction:column;align-items:center}
+      .unit-econ{grid-template-columns:1fr 1fr;gap:24px}
+      .ue{border-right:none;padding:12px 0;border-bottom:1px solid var(--border-2)}
+      .ue:nth-child(2n){border-bottom:none}
+      .cta-box{padding:44px 28px}
+      .hero-stats-bar .hs{min-width:50%}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="logo">UTSA<em>V</em></div>
+  <ul class="nav-menu">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#product">Product</a></li>
+    <li><a href="#market">Market</a></li>
+    <li><a href="#biz">Business</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="deck.html" target="_blank" style="color:var(--gold);font-weight:700">📊 Pitch Deck (12 Slides)</a></li>
+    <li><a href="mailto:invest@utsav.in" class="btn-nav">Talk to Us →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div id="particles"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="chip rv">🇮🇳 &nbsp; Seed Stage · India Event-Tech · 29,400+ Lines Production Code</div>
+      <h1 class="rv">India's <span class="gold-text">$130 Billion</span><br/>Wedding &amp; Event Economy — Finally Organised.</h1>
+      <p class="hero-desc rv">UTSAV is India’s SaaS-enabled event marketplace — pairing an 8-module Vendor Operating System with customer discovery, milestone escrow payments, and embedded event finance across 1.2 Crore annual celebrations.</p>
+      <div class="hero-ctas rv">
+        <a href="deck.html" target="_blank" class="btn-gold" id="btn-open-deck">📊 Launch Slide Deck (Presentation Mode)</a>
+        <a href="#product" class="btn-ghost" id="btn-see-product">📱 Explore the MVP</a>
+        <a href="mailto:invest@utsav.in" class="btn-ghost" id="btn-contact">✉️ Contact Founders</a>
+      </div>
+      <div class="hero-stats-bar rv">
+        <div class="hs"><span class="hs-val">$130B</span><span class="hs-lbl">Total TAM (Jefferies)</span></div>
+        <div class="hs"><span class="hs-val">$50B–$65B</span><span class="hs-lbl">Services SAM (Grand View)</span></div>
+        <div class="hs"><span class="hs-val">1.2 Cr</span><span class="hs-lbl">Weddings / Year</span></div>
+        <div class="hs"><span class="hs-val">85–90%</span><span class="hs-lbl">Unorganised / Offline</span></div>
+      </div>
+    </div>
+    <div class="hero-img rv-r">
+      <img src="assets/screen_hero_3d.jpg" alt="UTSAV App — Premium Event Booking Interface" />
+      <div class="float-badge fb-1">
+        <span class="fb-dot dot-green"></span>
+        <span>Milestone Escrow — ₹2.5L</span>
+      </div>
+      <div class="float-badge fb-2">
+        <span class="fb-dot dot-gold"></span>
+        <span>29.4k Lines Code · 82% MVP</span>
+      </div>
+      <div class="float-badge fb-3">
+        <span class="fb-dot dot-blue"></span>
+        <span>Vendor OS &amp; Admin Live</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF STRIP -->
+<div id="proof">
+  <div class="proof-strip">
+    <div class="proof-lbl">Traction &amp; Stack</div>
+    <div class="proof-items">
+      <div class="proof-item"><span>🚀</span> 29,400+ Lines of Production Code</div>
+      <div class="proof-item"><span>⚡</span> ~82% MVP Completed &amp; Pilot-Ready</div>
+      <div class="proof-item"><span>🏪</span> 8-Module Vendor Business OS Live</div>
+      <div class="proof-item"><span>🛡️</span> Admin KYC Verification Desk Active</div>
+      <div class="proof-item"><span>📱</span> Flutter iOS &amp; Android (153 Dart Files)</div>
+      <div class="proof-item"><span>🌐</span> React + TS Admin Panel (125 Files)</div>
+      <div class="proof-item"><span>🔐</span> Clean Architecture + Riverpod</div>
+      <div class="proof-item"><span>💳</span> Milestone Escrow &amp; RBI PA Ready</div>
+      <!-- duplicate for seamless loop -->
+      <div class="proof-item"><span>🚀</span> 29,400+ Lines of Production Code</div>
+      <div class="proof-item"><span>⚡</span> ~82% MVP Completed &amp; Pilot-Ready</div>
+      <div class="proof-item"><span>🏪</span> 8-Module Vendor Business OS Live</div>
+      <div class="proof-item"><span>🛡️</span> Admin KYC Verification Desk Active</div>
+      <div class="proof-item"><span>📱</span> Flutter iOS &amp; Android (153 Dart Files)</div>
+      <div class="proof-item"><span>🌐</span> React + TS Admin Panel (125 Files)</div>
+      <div class="proof-item"><span>🔐</span> Clean Architecture + Riverpod</div>
+      <div class="proof-item"><span>💳</span> Milestone Escrow &amp; RBI PA Ready</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="container">
+    <div class="sec-header">
+      <div class="sec-badge rv">The Problem</div>
+      <h2 class="sec-h rv">India's $130B Events Industry<br/>Runs on <em style="color:var(--gold)">WhatsApp &amp; Word-of-Mouth</em></h2>
+      <p class="sec-sub rv">1.2 Crore weddings happen in India every year. 85–90% of planning is completely manual, and incumbents suffer 85%–92% booking leakage. That's the gap UTSAV fills.</p>
+    </div>
+    <div class="prob-grid">
+      <div class="prob-card rv">
+        <div class="prob-icon">😤</div>
+        <h3>2x–3x "Wedding Tax" &amp; Opacity</h3>
+        <p>Vendors inflate quotes by 200%–300% for weddings vs identical corporate/private events. Pricing is opaque and unpredictable. 78% of couples feel overcharged, while 85%–90% of coordination is done manually through chaotic WhatsApp groups and calls.</p>
+        <div class="prob-stat">📊 78% feel overcharged · 85%+ manual WhatsApp</div>
+        <div class="prob-src">Source: WedMeGood 5th Annual Report, IJRTI Research</div>
+      </div>
+      <div class="prob-card rv" style="transition-delay:.1s">
+        <div class="prob-icon">🗺️</div>
+        <h3>85%–92% Discovery-to-Booking Leakage</h3>
+        <p>75% of couples discover vendors online, but &lt;10% contract online. Classified portals broadcast 1 lead to 5–10 competing vendors, yielding dismal 1%–5% conversion rates. Platforms monetize raw leads, not completed bookings, causing massive leakage.</p>
+        <div class="prob-stat">📱 85%–92% drop-off before contract · 1%–5% lead conversion</div>
+        <div class="prob-src">Source: IMARC Group 2025, WeddingPro &amp; Weddingkart Benchmarks</div>
+      </div>
+      <div class="prob-card rv" style="transition-delay:.2s">
+        <div class="prob-icon">💸</div>
+        <h3>Cash-Flow Traps &amp; Advance Forfeiture</h3>
+        <p>Average wedding spend is ₹12.5L nationally (20% of family lifetime wealth) and ₹39.5L in metros. Vendors suffer 15%–30% delayed milestone receivables (30–90 days late), while couples risk 100% advance forfeiture with zero standardized SLAs.</p>
+        <div class="prob-stat">💳 ₹12.5L national / ₹39.5L urban avg spend — Jefferies</div>
+        <div class="prob-src">Source: Jefferies 2024, WedMeGood 2025, Recordent MSME Data</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW -->
+<section id="whynow">
+  <div class="container">
+    <div class="sec-header">
+      <div class="sec-badge rv">Why Now</div>
+      <h2 class="sec-h rv">4 Converging Tailwinds <span class="gold-text">Make 2026 the Year</span></h2>
+      <p class="sec-sub rv">The market conditions that enable UTSAV to win are aligning right now — not 5 years ago, not 3 years from now.</p>
+    </div>
+    <div class="wnow-grid">
+      <div class="wnow-card rv">
+        <div class="wnow-num">01</div>
+        <div>
+          <h3>UPI + RBI Payment Aggregator Escrow Rails</h3>
+          <p>RBI's consolidated 2024–2025 Payment Aggregator guidelines enable compliant multi-vendor milestone split escrows (Razorpay/Cashfree) without touching marketplace balance sheets.</p>
+          <div class="tag">✓ Milestone trust infrastructure ready</div>
+        </div>
+      </div>
+      <div class="wnow-card rv" style="transition-delay:.1s">
+        <div class="wnow-num">02</div>
+        <div>
+          <h3>85.4% Couples Self-Planning (DIY Boom)</h3>
+          <p>85.4% of modern Indian couples now plan weddings independently without full-time wedding planners (WedMeGood). The mobile-first generation demands an operational OS, not an ad directory.</p>
+          <div class="tag">✓ Mobile-first generation is the buyer</div>
+        </div>
+      </div>
+      <div class="wnow-card rv" style="transition-delay:.2s">
+        <div class="wnow-num">03</div>
+        <div>
+          <h3>Favorable 2024 Tax Reforms</h3>
+          <p>Finance Act 2024 slashed e-commerce TDS (Section 194-O) from 1.0% to 0.1%, and GST Council lowered TCS (Section 52) to 0.5% — creating the lowest tax friction for digital marketplaces in Indian history.</p>
+          <div class="tag">✓ Lowest digital compliance friction</div>
+        </div>
+      </div>
+      <div class="wnow-card rv" style="transition-delay:.3s">
+        <div class="wnow-num">04</div>
+        <div>
+          <h3>Incumbent Weakness = Open Category</h3>
+          <p>WedMeGood raised only $3.07M total and reached ₹44.8 Cr revenue (FY25) as a classifieds directory with 40%–60% vendor churn. The full-stack SaaS + milestone booking layer remains completely unclaimed.</p>
+          <div class="tag">✓ No dominant player in booking+finance</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section id="product">
+  <div class="container">
+    <div class="sec-header">
+      <div class="sec-badge rv">The Product</div>
+      <h2 class="sec-h rv">Two Apps. One Flywheel.<br/><span class="gold-text">Built for India.</span></h2>
+      <p class="sec-sub rv">A production-grade Flutter app on iOS &amp; Android backed by a React TypeScript Admin Panel — 29,400+ lines of clean architecture code with 11 test suites. This is ~82% complete and pilot-ready.</p>
+    </div>
+    <div class="tabs rv">
+      <button class="tab active" id="tab-c" onclick="switchTab('c')">📱 Customer App</button>
+      <button class="tab" id="tab-v" onclick="switchTab('v')">🏪 Vendor App</button>
+    </div>
+
+    <div class="panel active" id="panel-c">
+      <div class="phones rv-l">
+        <div class="ph side"><img src="assets/screen_vendor.jpg" alt="Vendor Profile Screen" /></div>
+        <div class="ph main"><img src="assets/screen_home.jpg" alt="UTSAV Customer Home Screen" /></div>
+      </div>
+      <div class="prod-info rv-r">
+        <h3>Discover. Compare. Book. Finance.</h3>
+        <p>Customers get a premium end-to-end experience — from discovering verified vendors to paying via EMI — all inside one beautifully designed app.</p>
+        <div class="feat-list">
+          <div class="feat"><span class="feat-icon">🔍</span>Discover vendors by category, city &amp; budget<span class="feat-tag">Live</span></div>
+          <div class="feat"><span class="feat-icon">📸</span>Real portfolio photos, verified reviews &amp; pricing<span class="feat-tag">Live</span></div>
+          <div class="feat"><span class="feat-icon">📅</span>Real-time availability &amp; instant booking confirmation<span class="feat-tag">Live</span></div>
+          <div class="feat"><span class="feat-icon">💳</span>UTSAV Finance — EMI for events (3/6/12 months)<span class="feat-tag">Q2 2027</span></div>
+          <div class="feat"><span class="feat-icon">❤️</span>Wishlist, compare &amp; share vendors with family<span class="feat-tag">Live</span></div>
+          <div class="feat"><span class="feat-icon">🔔</span>Real-time booking updates &amp; push notifications<span class="feat-tag">Live</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-v">
+      <div class="phones rv-l">
+        <div class="ph side"><img src="assets/screen_finance.jpg" alt="Finance Screen" /></div>
+        <div class="ph main"><img src="assets/screen_dashboard.jpg" alt="Vendor Dashboard" /></div>
+      </div>
+      <div class="prod-info rv-r">
+        <h3>A Full Business OS for Indian Vendors.</h3>
+        <p>The vendor app gives local event businesses their first professional digital presence — with a dashboard, analytics, gallery, and booking management tools they've never had access to.</p>
+        <div class="feat-list">
+          <div class="feat"><span class="feat-icon">🏪</span>Professional verified storefront with UTSAV badge<span class="feat-tag">Live</span></div>
+          <div class="feat"><span class="feat-icon">📊</span>Live analytics — revenue, bookings &amp; ratings<span class="feat-tag">Live</span></div>
+          <div class="feat"><span class="feat-icon">🗓️</span>Booking calendar, request management &amp; chat<span class="feat-tag">Live</span></div>
+          <div class="feat"><span class="feat-icon">🖼️</span>Photo gallery — showcase portfolio to millions<span class="feat-tag">Live</span></div>
+          <div class="feat"><span class="feat-icon">⚙️</span>Service pricing, working hours &amp; package setup<span class="feat-tag">Live</span></div>
+          <div class="feat"><span class="feat-icon">✅</span>KYC verification flow &amp; compliance management<span class="feat-tag">Live</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET -->
+<section id="market">
+  <div class="container">
+    <div class="sec-header">
+      <div class="sec-badge rv">Market Opportunity</div>
+      <h2 class="sec-h rv">One of the World's Largest<br/><span class="gold-text">Undigitised Markets</span></h2>
+      <p class="sec-sub rv">India's wedding &amp; events industry is a $130B (₹11 Lakh Crore) titan, outperforming GDP growth while remaining 85–90% unorganised. The opportunity is generational.</p>
+    </div>
+    <div class="market-split">
+      <div class="rv-l">
+        <img src="assets/market_chart.jpg" alt="India Wedding Market Growth 2024-2030 — Jefferies, Grand View, CAIT Data" class="market-chart-wrap" style="border-radius:var(--r);border:1px solid var(--border);box-shadow:0 24px 60px rgba(0,0,0,.5)" />
+        <p class="market-source">Sources: Jefferies, Grand View Research 2024–30, CAIT 2025, IMARC Group</p>
+      </div>
+      <div class="rv-r">
+        <div class="mstat-grid">
+          <div class="mstat">
+            <span class="mstat-val">$130B</span>
+            <span class="mstat-lbl">Total TAM (₹11 Lakh Crore · Jefferies)</span>
+          </div>
+          <div class="mstat">
+            <span class="mstat-val">$50B–$65B</span>
+            <span class="mstat-lbl">Core Services SAM (Grand View)</span>
+          </div>
+          <div class="mstat">
+            <span class="mstat-val">₹6.5L Cr</span>
+            <span class="mstat-lbl">45-Day Peak Spend (~1.9% GDP · CAIT)</span>
+          </div>
+          <div class="mstat">
+            <span class="mstat-val">$10.95B</span>
+            <span class="mstat-lbl">Online Services Pool (IMARC 2025)</span>
+          </div>
+        </div>
+        <div class="tam-stack">
+          <div class="tam-row rv" style="transition-delay:.05s">
+            <div class="tam-label">TAM</div>
+            <div class="tam-bar-wrap"><div class="tam-bar" style="width:100%"></div></div>
+            <div class="tam-val">₹11 Lakh Cr ($130B)</div>
+          </div>
+          <div class="tam-row rv" style="transition-delay:.15s">
+            <div class="tam-label">SAM</div>
+            <div class="tam-bar-wrap"><div class="tam-bar" style="width:50%"></div></div>
+            <div class="tam-val">₹5.0 Lakh Cr ($60B)</div>
+          </div>
+          <div class="tam-row rv" style="transition-delay:.25s">
+            <div class="tam-label">SOM</div>
+            <div class="tam-bar-wrap"><div class="tam-bar" style="width:8%"></div></div>
+            <div class="tam-val">₹25–40 Cr (24M Target)</div>
+          </div>
+        </div>
+        <p style="font-size:.75rem;color:var(--text-3);margin-top:16px">TAM = Jefferies broad consumption. SAM = Grand View services basket. SOM = 24-month target GMV across 3 initial city clusters (Hyderabad, Jaipur, Pune).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS MODEL -->
+<section id="biz">
+  <div class="container">
+    <div class="sec-header">
+      <div class="sec-badge rv">Business Model</div>
+      <h2 class="sec-h rv">Four Revenue Engines.<br/><span class="gold-text">Each Compounds at Scale.</span></h2>
+      <p class="sec-sub rv">Vendor SaaS provides sticky ARR. Marketplace take-rates monetize GMV. Client assurance eliminates fraud. Embedded fintech captures high-margin spread.</p>
+    </div>
+    <div class="biz-grid">
+      <div class="biz-card rv">
+        <span class="biz-n">01</span>
+        <div class="biz-icon">🏪</div>
+        <h3>Vendor SaaS Subscriptions</h3>
+        <p>Operating OS for vendors: calendar lock-in, interactive proposals, automated digital contracts, and branded client portals. Slashes vendor churn from 50%+ to 10%–18%.</p>
+        <div class="biz-rate">₹1,500 – ₹3,500 / month</div>
+        <p class="biz-note">Comparable: HoneyBook $140M ARR at 146% NDR</p>
+      </div>
+      <div class="biz-card rv" style="transition-delay:.1s;border-color:var(--border)">
+        <span class="biz-n">02</span>
+        <div class="biz-icon">🤝</div>
+        <h3>Marketplace Take-Rate</h3>
+        <p>Calibrated to vendor margins: 3–5% for high-ticket banquets, 8–10% for creative photographers and decorators. Zero fee on dead leads — 100% aligned with closed transactions.</p>
+        <div class="biz-rate">5–8% on closed bookings</div>
+        <p class="biz-note">Comparable: Urban Company 20–28%, Airbnb Experiences 20%</p>
+      </div>
+      <div class="biz-card rv" style="transition-delay:.2s">
+        <span class="biz-n">03</span>
+        <div class="biz-icon">🛡️</div>
+        <h3>Client Assurance &amp; Escrow Fee</h3>
+        <p>Transparent fee for milestone escrow handling, 100% advance protection against vendor no-shows, and 24-hour emergency vendor replacement shield. CCPA 2023 compliant.</p>
+        <div class="biz-rate">1.0% – 2.0% assurance fee</div>
+        <p class="biz-note">Zero drip pricing · Upfront checkout transparency</p>
+      </div>
+      <div class="biz-card rv" style="transition-delay:.3s">
+        <span class="biz-n">04</span>
+        <div class="biz-icon">💳</div>
+        <h3>Embedded Event Fintech (LSP)</h3>
+        <p>Official Lending Service Provider (LSP) under RBI Digital Lending Guidelines. 1.5%–3.0% origination fee paid directly by partner NBFCs/Banks on ₹15.5 Lakh avg wedding loans.</p>
+        <div class="biz-rate">1.5% – 3.0% loan origination</div>
+        <p class="biz-note">Direct lender payout · Zero borrower fee</p>
+      </div>
+    </div>
+    <div class="unit-econ rv" style="margin-top:48px">
+      <div class="ue">
+        <span class="ue-val">₹12,000</span>
+        <span class="ue-lbl">Avg Platform Net Rev / Booking (8% of basket)</span>
+      </div>
+      <div class="ue">
+        <span class="ue-val">₹1,200 – ₹3k</span>
+        <span class="ue-lbl">Blended Consumer CAC (with viral loops)</span>
+      </div>
+      <div class="ue">
+        <span class="ue-val">14x – 25x</span>
+        <span class="ue-lbl">B2B Vendor LTV:CAC (₹1.4L–₹3.8L LTV)</span>
+      </div>
+      <div class="ue">
+        <span class="ue-val">65% – 75%</span>
+        <span class="ue-lbl">Target Blended Gross Margin at Scale</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITIVE -->
+<section id="comp">
+  <div class="container">
+    <div class="sec-header">
+      <div class="sec-badge rv">Competitive Landscape</div>
+      <h2 class="sec-h rv">The Category is Ours to Define.<br/><span class="gold-text">Nobody Does What We Do.</span></h2>
+      <p class="sec-sub rv">Incumbents are lead-dilution classifieds. WedMeGood raised $3.07M total, earns ₹44.8 Cr revenue (FY25), but suffers 40%–60% vendor churn with zero escrow or contracting rails. The transactional layer is wide open.</p>
+    </div>
+    <div class="ctbl-wrap rv">
+      <table class="ctbl" id="comp-table">
+        <thead>
+          <tr>
+            <th class="th-normal" style="text-align:left;padding-left:32px">Feature / Capability</th>
+            <th class="th-normal">WedMeGood<br/><span style="font-size:.65rem;color:var(--text-3);text-transform:none;letter-spacing:0">$3.07M raised · ₹44.8 Cr FY25</span></th>
+            <th class="th-normal">Weddingz.in (OYO)<br/><span style="font-size:.65rem;color:var(--text-3);text-transform:none;letter-spacing:0">Classified / Lead-Gen</span></th>
+            <th class="th-us">✦ UTSAV<br/><span style="font-size:.65rem;color:var(--gold-b);text-transform:none;letter-spacing:0">SaaS OS + Milestone Escrow</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>End-to-End Online Booking + Payment</td>
+            <td><span class="cx">✗</span></td>
+            <td><span class="cx">✗</span></td>
+            <td class="td-us"><span class="ck">✓</span></td>
+          </tr>
+          <tr>
+            <td>Milestone Escrow Rails (RBI PA Split)</td>
+            <td><span class="cx">✗</span></td>
+            <td><span class="cx">✗</span></td>
+            <td class="td-us"><span class="ck">✓</span></td>
+          </tr>
+          <tr>
+            <td>Canonical Calendar Lock-in (Zero Double-Booking)</td>
+            <td><span class="cx">✗</span></td>
+            <td><span class="cx">✗</span></td>
+            <td class="td-us"><span class="ck">✓</span></td>
+          </tr>
+          <tr>
+            <td>Vendor Business OS (CRM + Invoicing + Proposals)</td>
+            <td><span class="cp">~</span> Profile only</td>
+            <td><span class="cx">✗</span></td>
+            <td class="td-us"><span class="ck">✓</span> 8-Module OS</td>
+          </tr>
+          <tr>
+            <td>KYC Verified Vendor Profiles (Admin Portal)</td>
+            <td><span class="cp">~</span> Basic</td>
+            <td><span class="cp">~</span> Basic</td>
+            <td class="td-us"><span class="ck">✓</span> Strict KYC</td>
+          </tr>
+          <tr>
+            <td>Event Finance / EMI at Checkout (RBI LSP)</td>
+            <td><span class="cx">✗</span></td>
+            <td><span class="cx">✗</span></td>
+            <td class="td-us"><span class="ck">✓</span></td>
+          </tr>
+          <tr>
+            <td>Native iOS + Android App + Admin Panel</td>
+            <td><span class="ck">✓</span> App only</td>
+            <td><span class="cp">~</span> Web only</td>
+            <td class="td-us"><span class="ck">✓</span> Flutter + React</td>
+          </tr>
+          <tr>
+            <td>Non-Wedding Social Milestones (Birthdays, Corporate)</td>
+            <td><span class="cx">✗</span></td>
+            <td><span class="cx">✗</span></td>
+            <td class="td-us"><span class="ck">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="comp-note rv">
+      <strong>📌 Key Strategic Insight:</strong> WedMeGood — India's largest wedding portal — generated ₹44.8 Cr revenue in FY25 (up 57.9% YoY from ₹28.4 Cr) with 80,000+ listings. However, it monetizes top-of-funnel ad listings and broadcasts leads to 5–10 competitors, resulting in 40%–60% vendor churn and 85%+ inquiry leakage to WhatsApp. UTSAV captures the high-value transaction, milestone escrow, and vendor SaaS layers that incumbents cannot touch without cannibalizing their listing advertising model.
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="container">
+    <div class="sec-header">
+      <div class="sec-badge rv">Roadmap</div>
+      <h2 class="sec-h rv">Staged. Disciplined. <span class="gold-text">Milestone-Driven.</span></h2>
+      <p class="sec-sub rv">We're proving unit economics city by city before scaling — expanding from anchor vendor clusters into regional hubs.</p>
+    </div>
+    <div class="rm-grid">
+      <div class="rm-item rv">
+        <div class="rm-dot now"></div>
+        <div class="rm-card">
+          <div class="rm-q">Now · Q3 2026</div>
+          <h4>🚀 ~82% Production MVP Live</h4>
+          <ul>
+            <li>29,400+ lines of production code</li>
+            <li>8-Module Vendor OS live on Flutter</li>
+            <li>Admin KYC verification desk operational</li>
+            <li>Customer discovery &amp; inquiry flow ready</li>
+          </ul>
+          <div class="rm-milestone">✓ Where We Are Today</div>
+        </div>
+      </div>
+      <div class="rm-item rv" style="transition-delay:.1s">
+        <div class="rm-dot"></div>
+        <div class="rm-card">
+          <div class="rm-q">Q4 2026 – Q1 2027</div>
+          <h4>🏙️ Anchor City Liquidity</h4>
+          <ul>
+            <li>Top 20% anchor vendors (250–500 live)</li>
+            <li>Launch hubs: Hyderabad &amp; Jaipur</li>
+            <li>100–150 monthly completed bookings</li>
+            <li>₹2–₹4 Cr annualized GMV run-rate</li>
+          </ul>
+          <div class="rm-milestone">Seed Raise: ₹4–6 Crore</div>
+        </div>
+      </div>
+      <div class="rm-item rv" style="transition-delay:.2s">
+        <div class="rm-dot"></div>
+        <div class="rm-card">
+          <div class="rm-q">Q2 – Q3 2027</div>
+          <h4>💳 3 Regional Hubs &amp; Fintech</h4>
+          <ul>
+            <li>1,000+ verified vendors on platform</li>
+            <li>Scale across Hyderabad, Jaipur, Pune</li>
+            <li>Live RBI PA split escrow &amp; NBFC lending</li>
+            <li>₹15–₹25 Cr GMV run-rate</li>
+          </ul>
+          <div class="rm-milestone">Pre-Series A: ₹12–20 Crore</div>
+        </div>
+      </div>
+      <div class="rm-item rv" style="transition-delay:.3s">
+        <div class="rm-dot"></div>
+        <div class="rm-card">
+          <div class="rm-q">Q4 2027 → 2028</div>
+          <h4>🌐 National Multi-City Scale</h4>
+          <ul>
+            <li>3,000+ active vendors across 6 cities</li>
+            <li>₹40–₹60 Cr annualized GMV</li>
+            <li>₹3.5–₹5 Cr Net Platform Revenue</li>
+            <li>Positive contribution margins across hubs</li>
+          </ul>
+          <div class="rm-milestone">Series A: ₹40–80 Crore</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="container">
+    <div class="sec-header">
+      <div class="sec-badge rv">The Team</div>
+      <h2 class="sec-h rv">Founders Who <span class="gold-text">Live the Problem</span></h2>
+      <p class="sec-sub rv">We're builders obsessed with fixing one of India's most overlooked economic sectors. We have the product conviction, technical depth, and hustle to see this through.</p>
+    </div>
+    <div class="team-wrap">
+      <div class="team-card rv">
+        <div class="av">U</div>
+        <h3>Founder — CEO &amp; Product</h3>
+        <div class="team-role">Co-Founder · Technology &amp; Product</div>
+        <p>Architect of UTSAV's 29,400+ lines of production code — the customer app, vendor OS, admin panel, and Firebase architecture. Passionate about transforming unorganised Indian commerce with world-class engineering.</p>
+      </div>
+      <div class="team-card rv" style="transition-delay:.14s">
+        <div class="av">F</div>
+        <h3>Co-Founder — Strategy &amp; BD</h3>
+        <div class="team-role">Co-Founder · Business &amp; Investor Relations</div>
+        <p>Driving UTSAV's go-to-market, investor conversations, and business strategy. Bridges the gap between product vision and market reality — our interface with the investor and vendor ecosystem.</p>
+      </div>
+    </div>
+    <p class="rv" style="text-align:center;margin-top:48px;color:var(--text-3);font-size:.875rem">
+      🔍 We are actively seeking <strong style="color:var(--text-2)">advisors from fintech, event industry, and venture ecosystems</strong> — reach out if you'd like to be involved.
+    </p>
+  </div>
+</section>
+
+<!-- THE ASK -->
+<section id="ask">
+  <div class="container">
+    <div class="ask-inner">
+      <div class="ask-left rv-l">
+        <div class="sec-badge">The Investment Ask</div>
+        <h2>We're Raising ₹4–6 Crore.<br/><span class="gold-text">Here's Where Capital Goes.</span></h2>
+        <p style="margin-top:16px">We are raising an institutional Seed round (15%–20% equity dilution via CCPS/iSAFE at ₹25–₹35 Crore post-money valuation) to achieve city liquidity across 3 high-density wedding hubs over 18–24 months of runway.</p>
+        <div style="margin-top:28px;padding:20px 24px;background:rgba(232,160,32,.06);border:1px solid var(--border);border-radius:var(--r-sm)">
+          <div style="font-size:.75rem;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Target Seed Raise</div>
+          <div style="font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:800;color:var(--text)">₹4 – 6 Crore</div>
+          <div style="font-size:.85rem;color:var(--text-2);margin-top:4px">Seed Round · CCPS / iSAFE · 18–24 Months Runway</div>
+        </div>
+      </div>
+      <div class="ask-cards rv-r">
+        <div class="ask-card">
+          <span class="ask-icon">📱</span>
+          <div>
+            <h4>Product &amp; Engineering (30% · ₹1.5 Cr)</h4>
+            <p>Mobile/web scaling, real-time availability calendar sync, automated digital contract templates, and milestone escrow rails.</p>
+          </div>
+        </div>
+        <div class="ask-card">
+          <span class="ask-icon">🏙️</span>
+          <div>
+            <h4>City Launch &amp; Anchor Supply (20% · ₹1.0 Cr)</h4>
+            <p>Dedicated on-ground supply teams in Hyderabad, Jaipur &amp; Pune onboarding top 20% anchor venues, caterers &amp; photographers.</p>
+          </div>
+        </div>
+        <div class="ask-card">
+          <span class="ask-icon">📣</span>
+          <div>
+            <h4>Customer Acquisition &amp; Brand (18% · ₹0.9 Cr)</h4>
+            <p>Micro-market geo-fenced marketing, local wedding creator partnerships, and bridal showroom QR placements.</p>
+          </div>
+        </div>
+        <div class="ask-card">
+          <span class="ask-icon">🛡️</span>
+          <div>
+            <h4>Marketplace Ops &amp; Concierge (12% · ₹0.6 Cr)</h4>
+            <p>Milestone booking assurance, dispute mediation, and vendor emergency replacement guarantee desk.</p>
+          </div>
+        </div>
+        <div class="ask-card">
+          <span class="ask-icon">⚖️</span>
+          <div>
+            <h4>Regulatory, Legal &amp; Escrow (8% · ₹0.4 Cr)</h4>
+            <p>RBI Payment Aggregator split integration, 0.1% TDS &amp; 0.5% TCS tax automation, and LSP lending partner agreements.</p>
+          </div>
+        </div>
+        <div class="ask-card">
+          <span class="ask-icon">🛡️</span>
+          <div>
+            <h4>Reserve &amp; Contingency (12% · ₹0.6 Cr)</h4>
+            <p>3–4 months operational cash buffer to comfortably absorb off-season wedding calendar lulls.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-box rv">
+      <div class="sec-badge" style="margin-bottom:20px">Ready to Invest?</div>
+      <h2>Join India's $130 Billion<br/><span class="gold-text">Market Opportunity</span></h2>
+      <p>UTSAV is at the ground floor of India's event-tech revolution — armed with a working 29,400+ line production codebase, a defensible Vendor OS, and a category-defining business model. Let's connect.</p>
+      <div class="cta-row">
+        <a href="mailto:invest@utsav.in" class="btn-gold" id="cta-email-btn">✉️ invest@utsav.in</a>
+        <a href="#product" class="btn-ghost" id="cta-product-btn">📱 Explore the MVP</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">UTSA<em style="color:var(--gold);font-style:normal">V</em></div>
+  <p>© 2026 UTSAV Technologies · Confidential Investor Overview · Not for Public Distribution</p>
+  <div class="f-links">
+    <a href="mailto:invest@utsav.in">Contact</a>
+    <a href="#hero">Back to Top ↑</a>
+  </div>
+</footer>
+<div class="disclaimer">
+  All market figures sourced from Jefferies 2024, Grand View Research 2024–2030, CAIT 2025, IMARC Group, and WedMeGood 5th Annual Report. Forward-looking statements represent management operating models and are subject to risks and uncertainties. This document is for informational purposes only and does not constitute a securities offering.
+</div>
+
+<script>
+  // PARTICLES
+  const pc = document.getElementById('particles');
+  for(let i=0;i<35;i++){
+    const p=document.createElement('div');
+    p.className='p';
+    p.style.cssText=`left:${Math.random()*100}%;width:${1+Math.random()*2.5}px;height:${1+Math.random()*2.5}px;animation-duration:${10+Math.random()*18}s;animation-delay:${Math.random()*12}s;opacity:${.1+Math.random()*.35}`;
+    pc.appendChild(p);
+  }
+
+  // NAV
+  window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('stuck',scrollY>50));
+
+  // SCROLL REVEAL
+  const ro = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')});
+  },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el=>ro.observe(el));
+
+  // TABS
+  function switchTab(t){
+    ['c','v'].forEach(id=>{
+      document.getElementById('tab-'+id).classList.toggle('active',id===t);
+      document.getElementById('panel-'+id).classList.toggle('active',id===t);
+    });
+    document.querySelectorAll('#panel-'+t+' .rv,#panel-'+t+' .rv-l,#panel-'+t+' .rv-r').forEach(el=>{
+      el.classList.remove('on');
+      setTimeout(()=>el.classList.add('on'),40);
+    });
+  }
+</script>
+</body>
+</html>

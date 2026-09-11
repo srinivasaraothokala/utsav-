@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UTSAV — Seed Pitch Deck (₹4.0 Cr / $500k)</title>
+  <meta name="description" content="UTSAV Institutional Seed Pitch Deck: India's $130B Wedding & Event Operating System and Milestone Escrow Marketplace." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── DESIGN SYSTEM & TOKENS ── */
+    :root {
+      --bg: #06090F;
+      --bg-card: #0D1527;
+      --bg-card-hover: #121E38;
+      --bg-alt: #09101F;
+      --gold: #E8A020;
+      --gold-b: #F5B940;
+      --gold-d: #B07010;
+      --gold-glow: rgba(232, 160, 32, 0.15);
+      --gold-border: rgba(232, 160, 32, 0.22);
+      --emerald: #10B981;
+      --rose: #F43F5E;
+      --blue: #38BDF8;
+      --text: #F1F5F9;
+      --text-muted: rgba(241, 245, 249, 0.65);
+      --text-dim: rgba(241, 245, 249, 0.40);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── DECK CONTAINER & SLIDE TRANSITIONS ── */
+    #deck-viewport {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 30%, rgba(13, 21, 39, 0.8) 0%, var(--bg) 75%);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      padding: 56px 80px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.97) translateY(12px);
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1) translateY(0);
+      z-index: 10;
+    }
+
+    /* ── TOP HEADER / PROGRESS ── */
+    .deck-top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      background: linear-gradient(180deg, rgba(6, 9, 15, 0.9) 0%, transparent 100%);
+    }
+    .brand {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--text);
+    }
+    .brand span { color: var(--gold); }
+    .slide-progress-track {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      z-index: 101;
+    }
+    .slide-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-d), var(--gold-b));
+      width: 8.33%;
+      transition: width 0.35s ease;
+      box-shadow: 0 0 10px var(--gold);
+    }
+    .top-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .control-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text);
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .control-btn:hover {
+      background: var(--gold);
+      color: var(--bg);
+      border-color: var(--gold);
+    }
+
+    /* ── BOTTOM NAV BAR ── */
+    .deck-bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      background: linear-gradient(0deg, rgba(6, 9, 15, 0.9) 0%, transparent 100%);
+    }
+    .nav-hint {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .key-badge {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      color: var(--text);
+    }
+
+    /* ── SLIDE HEADER & TYPOGRAPHY ── */
+    .slide-header {
+      margin-bottom: 24px;
+    }
+    .tagline-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(232, 160, 32, 0.1);
+      border: 1px solid var(--gold-border);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .slide-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.2vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+    .slide-title .gold {
+      background: linear-gradient(135deg, var(--gold-b), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .slide-subtitle {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      max-width: 900px;
+      line-height: 1.5;
+    }
+
+    /* ── GRID LAYOUTS ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; height: 100%; align-items: stretch; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; height: 100%; align-items: stretch; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; height: 100%; align-items: stretch; }
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+    }
+
+    /* ── PREMIUM CARDS ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .card.highlight {
+      border-color: var(--gold-border);
+      background: linear-gradient(145deg, rgba(232, 160, 32, 0.08), var(--bg-card));
+      box-shadow: 0 12px 35px rgba(232, 160, 32, 0.08);
+    }
+    .card-top { margin-bottom: 12px; }
+    .card-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .card-h {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .card-p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ── STAT BOXES ── */
+    .stat-hero {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .stat-hero-green {
+      font-family: var(--font-display);
+      font-size: 2.7rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--emerald);
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+    .stat-sub {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    /* ── COMPARISON TABLES ── */
+    .deck-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      font-size: 0.85rem;
+    }
+    .deck-table th {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 14px 18px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .deck-table th.th-highlight {
+      color: var(--gold);
+      background: rgba(232, 160, 32, 0.1);
+      border-left: 1px solid var(--gold-border);
+      border-right: 1px solid var(--gold-border);
+    }
+    .deck-table td {
+      padding: 12px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      vertical-align: middle;
+    }
+    .deck-table td.td-highlight {
+      background: rgba(232, 160, 32, 0.05);
+      color: var(--text);
+      font-weight: 600;
+      border-left: 1px solid var(--gold-border);
+      border-right: 1px solid var(--gold-border);
+    }
+    .deck-table tr:last-child td { border-bottom: none; }
+    .badge-check { color: var(--emerald); font-weight: 800; font-size: 1rem; }
+    .badge-cross { color: var(--rose); font-weight: 800; font-size: 1rem; }
+
+    /* ── PILL BADGES & LISTS ── */
+    .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+    .bullet-list li {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      line-height: 1.45;
+    }
+    .bullet-list li::before {
+      content: '▸';
+      color: var(--gold);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    /* ── SPEAKER NOTES OVERLAY ── */
+    #speaker-notes-drawer {
+      position: fixed;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120%);
+      width: min(850px, 90vw);
+      max-height: 240px;
+      background: rgba(10, 16, 32, 0.96);
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      color: var(--text);
+      z-index: 200;
+      overflow-y: auto;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #speaker-notes-drawer.open {
+      transform: translateX(-50%) translateY(0);
+    }
+    .notes-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .notes-content {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+    .notes-content strong { color: var(--gold-b); }
+
+    /* ── PRINT & PDF STYLES ── */
+    @media print {
+      body { overflow: visible !important; height: auto !important; }
+      #deck-viewport { display: block !important; height: auto !important; }
+      .deck-top-bar, .deck-bottom-bar, #speaker-notes-drawer { display: none !important; }
+      .slide {
+        position: relative !important;
+        opacity: 1 !important;
+        transform: none !important;
+        display: flex !important;
+        height: 100vh !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        padding: 40px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PROGRESS BAR -->
+  <div class="slide-progress-track">
+    <div class="slide-progress-fill" id="progressFill"></div>
+  </div>
+
+  <!-- TOP BAR -->
+  <header class="deck-top-bar">
+    <div class="brand">UTSA<span>V</span> <span style="font-size:0.75rem;font-weight:600;color:var(--text-dim);letter-spacing:1px">| INVESTOR DECK</span></div>
+    <div class="top-controls">
+      <span id="slideCounter" style="font-family:var(--font-mono);font-weight:600;color:var(--gold)">01 / 12</span>
+      <button class="control-btn" id="btnToggleNotes" title="Toggle Presenter Notes (N)">🎙️ Script (N)</button>
+      <button class="control-btn" id="btnFullscreen" title="Toggle Fullscreen (F)">⛶ Fullscreen</button>
+      <a href="index.html" class="control-btn" style="text-decoration:none">🌐 Website</a>
+    </div>
+  </header>
+
+  <!-- BOTTOM BAR -->
+  <footer class="deck-bottom-bar">
+    <div>Confidential · Seed Financing Round · UTSAV Technologies Pvt Ltd</div>
+    <div class="nav-hint">
+      Use <span class="key-badge">←</span> <span class="key-badge">→</span> or <span class="key-badge">Space</span> to navigate · Press <span class="key-badge">P</span> to print/save PDF
+    </div>
+  </footer>
+
+  <!-- SPEAKER NOTES DRAWER -->
+  <div id="speaker-notes-drawer">
+    <div class="notes-title">
+      <span>🎙️ Founder Spoken Script (45–60 Seconds)</span>
+      <span style="cursor:pointer" onclick="toggleNotes()">✕ Close</span>
+    </div>
+    <div class="notes-content" id="notesContent">Loading script...</div>
+  </div>
+
+  <!-- SLIDES VIEWPORT -->
+  <main id="deck-viewport">
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 1: TITLE & THESIS
+         ══════════════════════════════════════════ -->
+    <section class="slide active" data-slide="1" data-notes="Good morning investors. Today, we are presenting UTSAV. India's wedding industry is a $130 Billion giant—the second-largest consumer category in the country after food and grocery. Yet, over 85% of vendors still operate unorganized on paper diaries and WhatsApp, while incumbent portals like WedMeGood remain classified directories with high churn. UTSAV is not a directory. We are building the full-stack Operating System and Milestone Escrow Marketplace that formalizes vendor workflows, secures payments, and captures the transaction layer. We aren't pitching a prototype—we have 29,400+ lines of production code complete across Customer, Vendor, and Admin applications. We are raising ₹4.0 Crore at 16% dilution to establish liquidity across 3 regional clusters.">
+      <div class="slide-header">
+        <div class="tagline-chip">🇮🇳 Seed Financing Round · Event-Tech & Vertical SaaS</div>
+        <h1 class="slide-title">The Operating System &amp; Escrow Marketplace for India's <span class="gold">$130 Billion</span> Celebration Economy.</h1>
+        <p class="slide-subtitle">Transforming 1.2 Crore annual unorganized weddings with an 8-module Vendor Business OS, client discovery engine, and RBI-compliant milestone escrow payments.</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-4">
+          <div class="card highlight">
+            <div class="card-top">
+              <span class="card-badge">Market Scale</span>
+              <div class="stat-hero">$130B</div>
+              <div class="stat-label">Total Economy (₹11L Cr)</div>
+            </div>
+            <div class="stat-sub">4th largest consumer sector in India (Jefferies)</div>
+          </div>
+          <div class="card">
+            <div class="card-top">
+              <span class="card-badge">Codebase Proof</span>
+              <div class="stat-hero">29.4k</div>
+              <div class="stat-label">Lines Production Code</div>
+            </div>
+            <div class="stat-sub">Dual-sided Flutter Apps + React Admin KYC Portal</div>
+          </div>
+          <div class="card">
+            <div class="card-top">
+              <span class="card-badge">Capital Ask</span>
+              <div class="stat-hero">₹4.0 Cr</div>
+              <div class="stat-label">Seed Check ($500,000)</div>
+            </div>
+            <div class="stat-sub">16% equity dilution · ₹25 Cr post-money valuation</div>
+          </div>
+          <div class="card">
+            <div class="card-top">
+              <span class="card-badge">Runway Goal</span>
+              <div class="stat-hero-green">₹40 Cr</div>
+              <div class="stat-label">24-Month GMV Target</div>
+            </div>
+            <div class="stat-sub">3 City Clusters: Hyderabad, Jaipur &amp; Pune</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 2: THE $130B MARKET OPPORTUNITY
+         ══════════════════════════════════════════ -->
+    <section class="slide" data-slide="2" data-notes="Let's look at the market sizing. Industry reporting from Jefferies commonly sizes the total wedding consumption economy at $130 Billion (~₹11 Lakh Crore). In peak season alone, CAIT reported that 46 to 48 lakh weddings generate ₹6.5 Lakh Crore—accounting for nearly 1.9% of India's total GDP. For our addressable market, physical retail like gold and apparel takes roughly 50%. The remaining 45-50%—$50 Billion to $65 Billion—is our core services SAM: banquets, catering, decor, photography, and makeup. Furthermore, IMARC estimates the digital wedding-services pool at $10.95 Billion, growing at 18.3% CAGR. Our 24-month SOM target is ₹40 Crore GMV across our initial 3 city hubs.">
+      <div class="slide-header">
+        <div class="tagline-chip">TAM · SAM · SOM Analysis</div>
+        <h1 class="slide-title">A Generationally Large, <span class="gold">Recession-Resilient</span> Market.</h1>
+        <p class="slide-subtitle">Weddings are culturally non-negotiable in India, absorbing 20% of a family's lifetime wealth—second only to food and grocery in household expenditure.</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-badge">TAM · Total Addressable Market</div>
+            <div class="stat-hero">$130B</div>
+            <div class="stat-label">₹11 Lakh Crore Annual Economy</div>
+            <ul class="bullet-list">
+              <li>1.0 – 1.2 Crore weddings celebrated annually in India</li>
+              <li>₹6.5 Lakh Crore spent during 45-day winter season alone (CAIT)</li>
+              <li>Accounts for ~1.9% of India's National GDP</li>
+              <li>Sources: Jefferies Research 2024, CAIT Industry Census</li>
+            </ul>
+          </div>
+
+          <div class="card highlight">
+            <div class="card-badge">SAM · Serviceable Addressable Market</div>
+            <div class="stat-hero">$50B–$65B</div>
+            <div class="stat-label">Core Event Services Basket</div>
+            <ul class="bullet-list">
+              <li>Excludes physical retail (gold jewellery &amp; apparel = 50%)</li>
+              <li>Covers banquets, catering, decor, photography &amp; styling</li>
+              <li>$10.95B (~₹91,000 Cr) digital transaction pool (IMARC)</li>
+              <li>Online booking channel growing at 18.3% CAGR through 2030</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge">SOM · 24-Month Target</div>
+            <div class="stat-hero-green">₹40 Cr</div>
+            <div class="stat-label">Serviceable Obtainable Market</div>
+            <ul class="bullet-list">
+              <li>Focused execution in 3 regional clusters: Hyderabad, Jaipur, Pune</li>
+              <li>1,500 active verified vendors under management</li>
+              <li>250+ closed milestone bookings per month</li>
+              <li>Blended 8.5% take-rate generating ₹3.6 Cr – ₹4.2 Cr net ARR</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 3: THE PROBLEM & FRICTION
+         ══════════════════════════════════════════ -->
+    <section class="slide" data-slide="3" data-notes="Why hasn't this market digitized? Because it suffers from high emotional stakes and zero infrastructure. For the consumer, an average family coordinates with 10 to 15 independent vendor categories. Over 85% of planning is done manually on WhatsApp and spreadsheets. Consumers face arbitrary 2x to 3x markups—the classic 'wedding tax'—as well as bait-and-switch photography crews and 100% advance forfeiture with zero legal recourse. For the vendor, the Hindu calendar concentrates demand into 30 to 45 primary muhurat dates, causing severe double-booking risks and 30 to 90 days of delayed milestone payments. Both sides are desperate for a trusted platform.">
+      <div class="slide-header">
+        <div class="tagline-chip">The Industry Dilemma</div>
+        <h1 class="slide-title">High-Ticket, High-Emotion, <span class="gold">Zero Structural Trust</span>.</h1>
+        <p class="slide-subtitle">85%–90% of vendor supply operates unorganized. The lack of standard contracts, verified pricing, and escrow rails creates acute friction on both sides.</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-badge" style="color:var(--rose)">Consumer &amp; Couple Pain Points</div>
+            <div class="card-h">The Chaos of Manual Planning</div>
+            <ul class="bullet-list">
+              <li><strong>The 2x–3x "Wedding Tax":</strong> Quotes inflated arbitrarily simply because the event is a wedding; zero price transparency.</li>
+              <li><strong>10–15 Vendor Coordination Matrix:</strong> 85.4% of couples plan independently without an agency, coordinating via chaotic WhatsApp groups.</li>
+              <li><strong>Portfolio Bait-and-Switch:</strong> Vendors display stolen master shoots on Instagram, then dispatch junior freelance crews on event day.</li>
+              <li><strong>100% Advance Forfeiture:</strong> Upfront deposits (20%–50%) routinely forfeited on cancellations without dispute arbitration.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge" style="color:var(--blue)">Vendor &amp; SME Pain Points</div>
+            <div class="card-h">Operational Bottlenecks &amp; Bad Debt</div>
+            <ul class="bullet-list">
+              <li><strong>Muhurat Seasonality &amp; Double-Booking:</strong> 45 peak auspicious dates create scheduling errors on paper diaries, destroying reputations.</li>
+              <li><strong>Severe Payment Delays:</strong> 15%–30% of milestone receivables are delayed 30 to 90 days or renegotiated post-event by clients.</li>
+              <li><strong>No Legal Contracts or GST Invoicing:</strong> Verbal terms mean vendors cannot bill for extra guest count or overtime hours.</li>
+              <li><strong>Working Capital Squeeze:</strong> Vendors incur upfront staff, decor, and floral costs before final client settlement.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 4: THE INCUMBENT FAILURE
+         ══════════════════════════════════════════ -->
+    <section class="slide" data-slide="4" data-notes="Investors always ask: 'Why hasn't WedMeGood or Justdial solved this?' The answer is the classic Innovator's Dilemma. WedMeGood raised $3M and generated ₹44.8 Cr in FY25, but 100% of its revenue comes from selling upfront vendor listing subscriptions. They take an inquiry and broadcast it to 5 to 10 competing vendors. This lead dilution causes a dismal 1% to 5% conversion rate and a staggering 40% to 60% vendor churn! Furthermore, 85% to 92% of inquiries drop off because couples take the conversation offline to WhatsApp to avoid platform commissions. Incumbents cannot pivot to a single-vendor transactional escrow model without destroying their 80,000 paying listing subscribers.">
+      <div class="slide-header">
+        <div class="tagline-chip">Competitive White Space</div>
+        <h1 class="slide-title">The Shared-Lead Trap &amp; <span class="gold">85%+ Platform Leakage</span>.</h1>
+        <p class="slide-subtitle">Incumbent directories monetize ad impressions, not transactions. Their business model inherently creates friction.</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-badge" style="color:var(--rose)">Incumbent Flaw #1</div>
+            <div class="card-h">Multi-Distribution Lead Dilution</div>
+            <div class="stat-hero" style="color:var(--rose);font-size:2.4rem">1% – 5%</div>
+            <div class="stat-label">Average Portal Lead Conversion</div>
+            <p class="card-p" style="margin-top:8px">Directories sell 1 inquiry to 5–10 competitors simultaneously. Vendors enter price-slashing wars, leading to poor ROI and 40%–60% annual vendor churn.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-badge" style="color:var(--rose)">Incumbent Flaw #2</div>
+            <div class="card-h">The Discovery-to-Booking Leakage</div>
+            <div class="stat-hero" style="color:var(--rose);font-size:2.4rem">85% – 92%</div>
+            <div class="stat-label">Drop-off to Offline Cash &amp; WhatsApp</div>
+            <p class="card-p" style="margin-top:8px">Couples find vendors online, but contract offline because portals offer no escrow security, no standardized contracts, and no milestone release rails.</p>
+          </div>
+
+          <div class="card highlight">
+            <div class="card-badge" style="color:var(--emerald)">The Innovator's Dilemma</div>
+            <div class="card-h">Why Incumbents Cannot Pivot</div>
+            <div class="stat-hero-green" style="font-size:2.4rem">₹44.8 Cr</div>
+            <div class="stat-label">WedMeGood FY25 Revenue (Pure Ads)</div>
+            <p class="card-p" style="margin-top:8px">If WedMeGood stops broadcasting shared leads or demands milestone escrow, their 80,000 paying ad vendors revolt. They are trapped in the classifieds model.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 5: THE SOLUTION — SAAS-ENABLED MARKETPLACE
+         ══════════════════════════════════════════ -->
+    <section class="slide" data-slide="5" data-notes="Here is our solution: UTSAV is a SaaS-Enabled Marketplace, inspired by the playbooks of Toast in restaurants and HoneyBook in creative freelancing. Our motto is: 'Come for the tool, stay for the network.' We provide vendors with a free, daily operational Business OS—digital proposal builders, calendar availability syncing, and legal contract templates. They use this software even for their existing offline clients. Once their business runs on Utsav, we introduce our customer discovery marketplace and RBI-compliant milestone escrow rails. We don't try to block WhatsApp; we make transacting on-platform economically and psychologically safer than cash.">
+      <div class="slide-header">
+        <div class="tagline-chip">Product Strategy</div>
+        <h1 class="slide-title">The Solution: <span class="gold">SaaS OS + Milestone Escrow</span>.</h1>
+        <p class="slide-subtitle">"Come for the tool, stay for the network." We equip vendors with daily business software, then capture the high-value transaction layer.</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-3">
+          <div class="card highlight">
+            <div class="card-badge">Pillar 1 · For Vendors</div>
+            <div class="card-h">The Vendor Business OS</div>
+            <ul class="bullet-list">
+              <li><strong>Interactive Digital Proposals:</strong> Branded estimates that look 10x more professional than PDF messages.</li>
+              <li><strong>Canonical Calendar Lock-In:</strong> Real-time date availability that completely eliminates double-booking errors.</li>
+              <li><strong>Automated Legal Contracts:</strong> Legally vetted SLAs covering overtime, cancellation timelines, and GST invoices.</li>
+              <li><strong>Single-Player Utility:</strong> Vendors manage their own organic/offline clients through the tool for free.</li>
+            </ul>
+          </div>
+
+          <div class="card highlight">
+            <div class="card-badge">Pillar 2 · For Couples</div>
+            <div class="card-h">Verified Discovery &amp; Escrow</div>
+            <ul class="bullet-list">
+              <li><strong>Vetted Physical Portfolios:</strong> Zero stock photos; all listings physically inspected and KYC-verified.</li>
+              <li><strong>Transparent Tiered Pricing:</strong> Upfront package inclusions with zero arbitrary 'wedding tax' markup.</li>
+              <li><strong>Milestone Escrow Vault:</strong> 30% advance on signing, 40% on event day, 30% upon raw footage/album clearance.</li>
+              <li><strong>24-Hour Replacement Guarantee:</strong> Platform mediation and emergency replacement backup.</li>
+            </ul>
+          </div>
+
+          <div class="card highlight">
+            <div class="card-badge">Pillar 3 · The Trust Moat</div>
+            <div class="card-h">Zero Offline Leakage</div>
+            <ul class="bullet-list">
+              <li><strong>No Disintermediation Incentive:</strong> Couples gain 100% advance protection; vendors eliminate post-event payment delays.</li>
+              <li><strong>Embedded Payment Rails:</strong> Zero-cost credit card transactions, low-interest EMIs, and UPI payment links.</li>
+              <li><strong>Transaction-Grounded Reviews:</strong> Reviews can only be submitted by clients who have settled payments on-platform.</li>
+              <li><strong>110%+ Net Dollar Retention:</strong> SaaS stickiness drops vendor churn from 50%+ down to 12%–15%.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 6: PRODUCT & CODEBASE TRACTION
+         ══════════════════════════════════════════ -->
+    <section class="slide" data-slide="6" data-notes="Unlike most early-stage decks with mockups, UTSAV is already engineered. We have written 29,400+ lines of production code. Our system comprises three unified applications: First, the Flutter Customer App for iOS and Android, featuring category filtering, detailed vendor profiles, service package configuration, and booking checkout. Second, the Flutter Vendor OS, providing profile management, portfolio uploads, booking requests, and calendar blocking. Third, a full React/TypeScript Admin Portal with an on-ground KYC verification desk, category commission toggles, and payment audit rails. Our MVP is ~82% complete and ready for live pilot deployment in Hyderabad.">
+      <div class="slide-header">
+        <div class="tagline-chip">Engineering Depth</div>
+        <h1 class="slide-title">Not a Prototype. <span class="gold">29,400+ Lines</span> of Production Code.</h1>
+        <p class="slide-subtitle">A fully realized dual-sided architecture built on Flutter, Firebase, and a React/TypeScript Admin KYC Portal.</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-badge">Customer Experience</div>
+            <div class="card-h">Flutter Customer App</div>
+            <div style="font-size:0.75rem;font-family:var(--font-mono);color:var(--gold);margin-bottom:10px">14,200+ Lines · iOS &amp; Android</div>
+            <ul class="bullet-list">
+              <li>Live vendor search with 10+ category filters</li>
+              <li>Real-time availability checker for auspicious dates</li>
+              <li>Dynamic package builder with custom add-ons</li>
+              <li>Milestone payment schedule visualization &amp; checkout</li>
+              <li>Clean Architecture with Riverpod state management</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge">Vendor Operating System</div>
+            <div class="card-h">Flutter Vendor App</div>
+            <div style="font-size:0.75rem;font-family:var(--font-mono);color:var(--gold);margin-bottom:10px">11,800+ Lines · iOS &amp; Android</div>
+            <ul class="bullet-list">
+              <li>Multi-step business registration &amp; KYC document upload</li>
+              <li>Interactive digital estimate &amp; quotation generator</li>
+              <li>Calendar lock-in to block dates and avoid double-booking</li>
+              <li>Milestone disbursement dashboard &amp; earnings tracking</li>
+              <li>Direct WhatsApp integration for verified client leads</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge">Governance &amp; Trust</div>
+            <div class="card-h">React / TS Admin Portal</div>
+            <div style="font-size:0.75rem;font-family:var(--font-mono);color:var(--gold);margin-bottom:10px">3,400+ Lines · Web Dashboard</div>
+            <ul class="bullet-list">
+              <li>Physical KYC document review &amp; verification desk</li>
+              <li>Vendor portfolio authenticity auditor</li>
+              <li>Category-specific take-rate &amp; commission management</li>
+              <li>Milestone escrow release &amp; dispute mediation workbench</li>
+              <li>Real-time platform GMV and booking analytics</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 7: REGULATORY & MACRO TAILWINDS
+         ══════════════════════════════════════════ -->
+    <section class="slide" data-slide="7" data-notes="Why is NOW the exact time to build UTSAV? Three macro catalysts have converged in 2024-2026. First, the Reserve Bank of India's updated Payment Aggregator guidelines have formalized escrow split-settlement rails through partners like Razorpay Route and Cashfree Split. Second, recent tax reforms: the Finance Act 2024 slashed e-commerce TDS under Section 194-O from 1.0% to 0.1%, and GST TCS was cut to 0.5%, drastically reducing formalization friction for small vendors. Third, consumer behavior: 38% of wedding payments are now settled digitally via UPI, while 87% of couples demand visual discovery on social platforms. The infrastructure is finally ready.">
+      <div class="slide-header">
+        <div class="tagline-chip">The Macro Inflection</div>
+        <h1 class="slide-title">Why Now? <span class="gold">Fintech Rails, Tax Reforms &amp; Gen-Z</span>.</h1>
+        <p class="slide-subtitle">Three structural shifts have converged to make full-stack wedding formalization legally and technologically viable in 2024–2026.</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-badge">Catalyst #1 · RBI Compliance</div>
+            <div class="card-h">Payment Aggregator Split Escrow</div>
+            <p class="card-p">Under RBI PA guidelines, marketplaces cannot hold funds in corporate accounts. Authorized Payment Aggregators (Razorpay / Cashfree) now provide compliant <strong>Split Nodal Escrow APIs</strong>. This allows automatic, programmatic milestone disbursement (T+1) while deducting platform commission legally.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-badge">Catalyst #2 · Tax Modernization</div>
+            <div class="card-h">TDS &amp; TCS Compliance Relief</div>
+            <p class="card-p">Under the <strong>Finance Act 2024</strong>, Section 194-O TDS for e-commerce operators was slashed from 1.0% down to <strong>0.1%</strong> (effective Oct 2024), and GST TCS was cut to <strong>0.5%</strong>. This removed the tax penalty that historically drove small vendors to prefer cash over digital records.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-badge">Catalyst #3 · Digital Shift</div>
+            <div class="card-h">UPI Normalization &amp; Gen-Z Hosts</div>
+            <p class="card-p"><strong>38% of wedding payments</strong> are now settled digitally (WedMeGood 2025). 87% of modern couples conduct vendor research on visual platforms, demanding digital contracts, online booking transparency, and flexible financing over traditional cash transactions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 8: BUSINESS MODEL & MONETIZATION
+         ══════════════════════════════════════════ -->
+    <section class="slide" data-slide="8" data-notes="Let's look at how UTSAV monetizes. Unlike directories that rely on one revenue stream, we operate a 4-engine monetization model. Our primary engine is transactional take-rates, calibrated by category margins: 5% to 7% for high-ticket banquets and catering, 8% to 10% for decor, and 10% to 15% for photography and makeup. This produces a healthy 8.5% to 10% blended take-rate. Engine 2 is our Vendor SaaS subscription, charging ₹1,499 to ₹2,499 per month for advanced CRM, contracts, and calendar lock-in. Engine 3 is a 1.5% to 2% client assurance fee. Engine 4 is embedded fintech: as an RBI-compliant Lending Service Provider, we earn 1.5% to 3% loan origination fees from partner NBFCs.">
+      <div class="slide-header">
+        <div class="tagline-chip">4-Engine Monetization Architecture</div>
+        <h1 class="slide-title">Calibrated Take-Rates, <span class="gold">Predictable SaaS &amp; Fintech</span>.</h1>
+        <p class="slide-subtitle">We charge take-rates aligned with vendor gross margins to prevent disintermediation, paired with recurring SaaS and fintech origination.</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-4">
+          <div class="card highlight">
+            <div class="card-badge">Engine 1 · 65% Revenue</div>
+            <div class="card-h">Tiered Take-Rates</div>
+            <div class="stat-hero">8.5%</div>
+            <div class="stat-label">Blended Transaction Take-Rate</div>
+            <ul class="bullet-list" style="margin-top:10px">
+              <li>Venues &amp; Catering: 5%–7% (protects thin margins)</li>
+              <li>Décor &amp; Production: 8%–10%</li>
+              <li>Photography: 10%–12%</li>
+              <li>Makeup / Mehndi: 12%–15%</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge">Engine 2 · 22% Revenue</div>
+            <div class="card-h">Vendor SaaS OS</div>
+            <div class="stat-hero">₹1.9k</div>
+            <div class="stat-label">Monthly Subscription / Vendor</div>
+            <ul class="bullet-list" style="margin-top:10px">
+              <li>Interactive proposal generator</li>
+              <li>Multi-device calendar sync</li>
+              <li>Automated digital contracts &amp; GST</li>
+              <li>Predictable off-season cash flow</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge">Engine 3 · 8% Revenue</div>
+            <div class="card-h">Client Assurance</div>
+            <div class="stat-hero">1.5%–2%</div>
+            <div class="stat-label">Escrow &amp; Dispute Shield</div>
+            <ul class="bullet-list" style="margin-top:10px">
+              <li>100% advance deposit protection</li>
+              <li>Milestone release arbitration</li>
+              <li>24-hour emergency vendor replacement</li>
+              <li>Transparent checkout pricing</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge">Engine 4 · 5% Revenue</div>
+            <div class="card-h">Embedded Fintech</div>
+            <div class="stat-hero">1.5%–3%</div>
+            <div class="stat-label">Lending Origination (LSP)</div>
+            <ul class="bullet-list" style="margin-top:10px">
+              <li>Partnered with RBI-regulated NBFCs</li>
+              <li>Zero fee to borrower (RBI compliant)</li>
+              <li>Average loan ticket: ₹15.5 Lakh</li>
+              <li>Direct lender-to-vendor payout</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 9: UNIT ECONOMICS & VIRAL LOOPS
+         ══════════════════════════════════════════ -->
+    <section class="slide" data-slide="9" data-notes="A common objection in wedding-tech is: 'A wedding happens once in a lifetime, so customer churn is 100% and CAC is fatal.' Here is how we break that trap: First, we invert the platform center to the B2B Vendor. A couple transacts once, but a vendor executes 25 to 60 events every single year for a 10-year career. By acting as their operating system, our vendor LTV reaches ₹1.4 Lakh to ₹3.8 Lakh against an onboarding CAC of just ₹5,000 to ₹10,000—delivering a phenomenal 14:1 to 25:1 LTV-to-CAC ratio. Second, our built-in viral loops: when a vendor sends a digital proposal, 8% to 12% of collaborating florists and DJs sign up for our software. And with 320 guests per wedding, 1.5% to 3.5% convert to new event hosts organically.">
+      <div class="slide-header">
+        <div class="tagline-chip">Unit Economics &amp; PLG</div>
+        <h1 class="slide-title">Inverting the Platform Center: <span class="gold">14x–25x Vendor LTV:CAC</span>.</h1>
+        <p class="slide-subtitle">Solving the 'one-time wedding' retention cliff by transforming vendors into multi-year recurring SaaS and payment engines.</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-3">
+          <div class="card highlight">
+            <div class="card-badge">B2B Vendor Economics</div>
+            <div class="stat-hero">14x–25x</div>
+            <div class="stat-label">Vendor LTV : CAC Ratio</div>
+            <ul class="bullet-list" style="margin-top:8px">
+              <li><strong>B2B Vendor CAC:</strong> ₹5,000 – ₹10,000 (direct field onboarding)</li>
+              <li><strong>Vendor Lifespan:</strong> 3.5 – 5.0 years (system of record stickiness)</li>
+              <li><strong>Annual Monetization:</strong> ₹55,000 – ₹1,10,000 (SaaS + take-rates)</li>
+              <li><strong>Vendor LTV:</strong> ₹1,40,000 – ₹3,80,000</li>
+              <li><strong>Payback Period:</strong> 2 – 5 months (immediate booking cut)</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge">B2C Consumer Economics</div>
+            <div class="stat-hero">₹12,000</div>
+            <div class="stat-label">Net Platform Rev / Booking (8%)</div>
+            <ul class="bullet-list" style="margin-top:8px">
+              <li><strong>Blended Consumer CAC:</strong> ₹1,200 – ₹3,000 ($15–$36)</li>
+              <li><strong>High-Intent Search CPC:</strong> ₹40 – ₹180</li>
+              <li><strong>Lifecycle Extension:</strong> Retaining families across 5 years (Wedding ➔ Anniversaries ➔ Baby Showers ➔ Birthdays)</li>
+              <li><strong>Contribution Margin:</strong> Healthy 65%–75% gross margin</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge">Organic Growth Loops</div>
+            <div class="stat-hero-green">12%</div>
+            <div class="stat-label">B2B Referral Attach Rate</div>
+            <ul class="bullet-list" style="margin-top:8px">
+              <li><strong>'Powered By' Loop:</strong> 8%–12% of collaborating vendors (DJs, second shooters) adopt software upon receiving digital files.</li>
+              <li><strong>Guest-to-Host Compounding Loop:</strong> Average Indian wedding has 310–330 guests; 1.5%–3.5% convert to event creators within 24 months.</li>
+              <li>Organic discovery lowers blended CAC month-over-month.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 10: COMPETITIVE MOATS
+         ══════════════════════════════════════════ -->
+    <section class="slide" data-slide="10" data-notes="Let's look at our competitive matrix. Incumbents like WedMeGood and WeddingWire operate pure ad directories. Weddingz.in under OYO focuses only on banquets. None of them provide the operational SaaS and milestone escrow layer. UTSAV's competitive defensibility rests on four moats: First, Canonical Calendar Lock-in: once a vendor's seasonal calendar is in our app, switching costs are prohibitive because leaving means risking double-bookings on peak muhurats. Second, our Milestone Escrow Vault: controlling fund release creates an institutional trust moat that direct WhatsApp chats cannot match. Third, standardized digital SLAs. Fourth, transaction-verified reviews that cannot be bought or manipulated.">
+      <div class="slide-header">
+        <div class="tagline-chip">Defensibility Matrix</div>
+        <h1 class="slide-title">Four Structural Moats That <span class="gold">Directories Cannot Replicate</span>.</h1>
+        <p class="slide-subtitle">We do not sell ads or shared leads. We provide the workflow infrastructure and payment rails for high-stakes events.</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2">
+          <div>
+            <table class="deck-table">
+              <thead>
+                <tr>
+                  <th>Feature / Capability</th>
+                  <th>WedMeGood</th>
+                  <th>Weddingz</th>
+                  <th class="th-highlight">✦ UTSAV</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>End-to-End Online Booking</td>
+                  <td><span class="badge-cross">✗</span></td>
+                  <td><span class="badge-cross">✗</span></td>
+                  <td class="td-highlight"><span class="badge-check">✓</span></td>
+                </tr>
+                <tr>
+                  <td>Milestone Escrow Rails (RBI PA)</td>
+                  <td><span class="badge-cross">✗</span></td>
+                  <td><span class="badge-cross">✗</span></td>
+                  <td class="td-highlight"><span class="badge-check">✓</span></td>
+                </tr>
+                <tr>
+                  <td>Canonical Calendar Lock-In</td>
+                  <td><span class="badge-cross">✗</span></td>
+                  <td><span class="badge-cross">✗</span></td>
+                  <td class="td-highlight"><span class="badge-check">✓</span></td>
+                </tr>
+                <tr>
+                  <td>Automated Legal SLAs &amp; GST</td>
+                  <td><span class="badge-cross">✗</span></td>
+                  <td><span class="badge-cross">✗</span></td>
+                  <td class="td-highlight"><span class="badge-check">✓</span></td>
+                </tr>
+                <tr>
+                  <td>Embedded Event Finance (BNPL/LSP)</td>
+                  <td><span class="badge-cross">✗</span></td>
+                  <td><span class="badge-cross">✗</span></td>
+                  <td class="td-highlight"><span class="badge-check">✓</span></td>
+                </tr>
+                <tr>
+                  <td>Single-Vendor Lead Routing (No Dilution)</td>
+                  <td><span class="badge-cross">✗</span></td>
+                  <td><span class="badge-cross">✗</span></td>
+                  <td class="td-highlight"><span class="badge-check">✓</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card highlight">
+            <div class="card-badge">Our 4 Core Moats</div>
+            <ul class="bullet-list" style="gap:14px">
+              <li><strong>1. System of Record Lock-In:</strong> Once an anchor vendor runs their seasonal dates through UTSAV, double-booking risks vanish. Switching costs become prohibitive.</li>
+              <li><strong>2. Milestone Escrow Vault:</strong> High ticket sizes create deep distrust. Controlling fund release creates an institutional trust moat impossible in informal WhatsApp chats.</li>
+              <li><strong>3. Standardized Legal SLAs:</strong> Digital e-signatures covering overtime, force majeure, and deliverable timelines eliminate the unorganized sector's greatest friction.</li>
+              <li><strong>4. Transaction-Verified Reviews:</strong> Reviews can only be submitted post-payment settlement, creating a clean, un-gameable reputation graph.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 11: 24-MONTH ROADMAP TO SERIES A
+         ══════════════════════════════════════════ -->
+    <section class="slide" data-slide="11" data-notes="Here is our execution roadmap for the next 24 months. We are not burning capital on unfocused national marketing. We are proving deep liquidity cluster by cluster. In Month 6, we validate our first anchor city—Hyderabad—reaching 300 verified vendors and ₹3.5 Cr GMV run-rate. In Month 12, we expand into Jaipur and Goa as destination hubs, hitting 600 vendors and positive contribution margins in City 1. By Month 24, with 3 cities fully operational, we will reach 1,500 active verified vendors, ₹40 Crore annualized GMV ($5M), and ₹3.6 Cr to ₹4.2 Cr net ARR—positioning UTSAV perfectly for a $5M Series A round.">
+      <div class="slide-header">
+        <div class="tagline-chip">Disciplined Milestone Trajectory</div>
+        <h1 class="slide-title">24 Months to Series A: <span class="gold">Proving Liquidity Cluster by Cluster</span>.</h1>
+        <p class="slide-subtitle">Staged capital deployment focused on micro-market transaction density before regional expansion.</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-4">
+          <div class="card">
+            <div class="card-badge">Now · Q3 2026</div>
+            <div class="card-h">MVP in Market</div>
+            <div class="stat-hero" style="font-size:2rem">Pilot</div>
+            <div class="stat-label">Hyderabad Anchor</div>
+            <ul class="bullet-list" style="margin-top:10px">
+              <li>29.4k lines production code</li>
+              <li>Customer &amp; Vendor Flutter apps</li>
+              <li>React Admin KYC portal</li>
+              <li>Initial 30 anchor vendors</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge">Month 6 · Q1 2027</div>
+            <div class="card-h">Anchor Liquidity</div>
+            <div class="stat-hero" style="font-size:2rem">₹3.5 Cr</div>
+            <div class="stat-label">Annualized GMV</div>
+            <ul class="bullet-list" style="margin-top:10px">
+              <li>300 verified active vendors</li>
+              <li>35 closed events / month</li>
+              <li>Single-city proof in Hyderabad</li>
+              <li>Escrow split-payouts operational</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="card-badge">Month 12 · Q3 2027</div>
+            <div class="card-h">Multi-Stream Expansion</div>
+            <div class="stat-hero" style="font-size:2rem">₹12 Cr</div>
+            <div class="stat-label">Annualized GMV</div>
+            <ul class="bullet-list" style="margin-top:10px">
+              <li>Launch Hubs: Jaipur &amp; Goa</li>
+              <li>700 active verified vendors</li>
+              <li>80+ monthly bookings</li>
+              <li>Positive contribution margin City 1</li>
+            </ul>
+          </div>
+
+          <div class="card highlight">
+            <div class="card-badge">Month 24 · Series A Ready</div>
+            <div class="card-h">National Scale</div>
+            <div class="stat-hero-green" style="font-size:2rem">₹40 Cr</div>
+            <div class="stat-label">Annualized GMV ($5M)</div>
+            <ul class="bullet-list" style="margin-top:10px">
+              <li>1,500 active verified vendors</li>
+              <li>250+ events / month</li>
+              <li><strong>₹3.6 Cr – ₹4.2 Cr Net ARR</strong></li>
+              <li>Series A Fundraise ($4M–$6M)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         SLIDE 12: THE ASK & USE OF FUNDS
+         ══════════════════════════════════════════ -->
+    <section class="slide" data-slide="12" data-notes="To execute this plan, we are raising a ₹4.0 Crore Seed round ($500,000) at 16% equity dilution, implying a ₹25.0 Crore post-money valuation. This capital buys 24 months of operational runway to achieve our Series A milestones. Our fund allocation is strictly disciplined: 32% for Supply Operations and Feet-on-Street field verification in Hyderabad, Jaipur, and Pune. 28% for Product, Core Engineering, and live Firestore/escrow integrations. 22% for hyper-local geo-fenced demand generation and bridal showroom tie-ups. And 18% for legal compliance and an off-season cash buffer. We have the working software, the verified unit economics, and the category-defining vision. Thank you, and we welcome your partnership.">
+      <div class="slide-header">
+        <div class="tagline-chip">Capital Raise &amp; Deployment</div>
+        <h1 class="slide-title">The Seed Ask: <span class="gold">₹4.0 Crore</span> for 24-Month Runway.</h1>
+        <p class="slide-subtitle">Backing a high-conviction team to capture the transactional and operating layer of India's $130 Billion celebration sector.</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card highlight">
+            <div class="card-badge">Financing Terms</div>
+            <div class="stat-hero">₹4.0 Cr</div>
+            <div class="stat-label">Seed Capital Raise ($500,000)</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px">
+              <div>
+                <div class="stat-label">Target Dilution</div>
+                <div style="font-size:1.5rem;font-weight:700;color:var(--text)">16.0%</div>
+                <div class="stat-sub">CCPS / iSAFE Note</div>
+              </div>
+              <div>
+                <div class="stat-label">Post-Money Valuation</div>
+                <div style="font-size:1.5rem;font-weight:700;color:var(--gold)">₹25.0 Cr</div>
+                <div class="stat-sub">$3.0 Million</div>
+              </div>
+            </div>
+            <div style="margin-top:20px;padding:14px;background:rgba(255,255,255,0.03);border-radius:10px;font-size:0.8rem;color:var(--text-muted)">
+              ✉️ Direct Contact: <strong style="color:var(--gold)">invest@utsav.in</strong> · Founder &amp; CEO<br/>
+              📍 Headquarters: Hyderabad / Jaipur, India
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-badge">24-Month Use of Funds (₹4.0 Cr)</div>
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:0.82rem;font-weight:700;margin-bottom:4px">
+                  <span>Supply Ops &amp; Field Onboarding</span>
+                  <span style="color:var(--gold)">32% · ₹1.28 Cr</span>
+                </div>
+                <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px">
+                  <div style="width:32%;height:100%;background:var(--gold);border-radius:3px"></div>
+                </div>
+              </div>
+
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:0.82rem;font-weight:700;margin-bottom:4px">
+                  <span>Product, Core Eng &amp; Escrow Tech</span>
+                  <span style="color:var(--blue)">28% · ₹1.12 Cr</span>
+                </div>
+                <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px">
+                  <div style="width:28%;height:100%;background:var(--blue);border-radius:3px"></div>
+                </div>
+              </div>
+
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:0.82rem;font-weight:700;margin-bottom:4px">
+                  <span>Hyper-Local Demand Gen &amp; Partnerships</span>
+                  <span style="color:var(--emerald)">22% · ₹88 Lakh</span>
+                </div>
+                <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px">
+                  <div style="width:22%;height:100%;background:var(--emerald);border-radius:3px"></div>
+                </div>
+              </div>
+
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:0.82rem;font-weight:700;margin-bottom:4px">
+                  <span>Legal, Compliance &amp; 4-Mo Cash Buffer</span>
+                  <span style="color:var(--text-dim)">18% · ₹72 Lakh</span>
+                </div>
+                <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px">
+                  <div style="width:18%;height:100%;background:var(--text-dim);border-radius:3px"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // ── DECK NAVIGATION LOGIC ──
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const progressFill = document.getElementById('progressFill');
+    const slideCounter = document.getElementById('slideCounter');
+    const notesContent = document.getElementById('notesContent');
+    const notesDrawer = document.getElementById('speaker-notes-drawer');
+    let currentIndex = 0;
+
+    function updateDeck(index) {
+      if (index < 0) index = 0;
+      if (index >= slides.length) index = slides.length - 1;
+      currentIndex = index;
+
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentIndex);
+      });
+
+      const currentNum = currentIndex + 1;
+      const total = slides.length;
+      progressFill.style.width = `${(currentNum / total) * 100}%`;
+      slideCounter.textContent = `${String(currentNum).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+
+      // Update speaker notes
+      const activeSlide = slides[currentIndex];
+      notesContent.innerHTML = activeSlide.getAttribute('data-notes') || 'No speaker script for this slide.';
+    }
+
+    function nextSlide() { updateDeck(currentIndex + 1); }
+    function prevSlide() { updateDeck(currentIndex - 1); }
+
+    function toggleNotes() {
+      notesDrawer.classList.toggle('open');
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => alert(err.message));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        updateDeck(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        updateDeck(slides.length - 1);
+      } else if (e.key === 'n' || e.key === 'N') {
+        toggleNotes();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      } else if (e.key === 'p' || e.key === 'P') {
+        window.print();
+      }
+    });
+
+    // Touch / Click navigation
+    document.getElementById('btnToggleNotes').addEventListener('click', toggleNotes);
+    document.getElementById('btnFullscreen').addEventListener('click', toggleFullscreen);
+
+    // Initialize
+    updateDeck(0);
+  </script>
+</body>
+</html>

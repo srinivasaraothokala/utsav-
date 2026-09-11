@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UTSAV — 25 Curated Indian Seed VCs & Investor Outreach Directory</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 14mm 14mm 14mm 14mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1e293b;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .header {
+      border-bottom: 2px solid #6366f1;
+      padding-bottom: 14px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      margin: 0 0 4px 0;
+    }
+
+    .brand-title span {
+      color: #6366f1;
+    }
+
+    .brand-subtitle {
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748b;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .meta-tag {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #334155;
+      text-align: right;
+    }
+
+    .meta-tag .tag-val {
+      color: #6366f1;
+      font-weight: 800;
+    }
+
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 18px 0 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tier-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tier-1 { background: #e0e7ff; color: #3730a3; border: 1px solid #c7d2fe; }
+    .tier-2 { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+    .tier-3 { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 14px;
+      page-break-inside: auto;
+    }
+
+    tr {
+      page-break-inside: avoid;
+      page-break-after: auto;
+    }
+
+    thead th {
+      background: #0f172a;
+      color: #ffffff;
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      padding: 7px 8px;
+      text-align: left;
+      border: 1px solid #0f172a;
+    }
+
+    tbody td {
+      padding: 6.5px 8px;
+      font-size: 10px;
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .fund-name {
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .partner-name {
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .cheque-tag {
+      display: inline-block;
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 9.5px;
+      white-space: nowrap;
+    }
+
+    .link-text {
+      color: #4f46e5;
+      font-family: monospace;
+      font-size: 9px;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    .card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 3px solid #6366f1;
+      padding: 10px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      page-break-inside: avoid;
+    }
+
+    .card-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .card p, .card blockquote {
+      margin: 0;
+      font-size: 9.5px;
+      color: #334155;
+      line-height: 1.45;
+    }
+
+    .card blockquote {
+      font-style: italic;
+      color: #475569;
+      background: #ffffff;
+      padding: 6px 8px;
+      border-radius: 4px;
+      border: 1px solid #cbd5e1;
+      margin-top: 4px;
+      font-family: monospace;
+      font-size: 9px;
+    }
+
+    .footer {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      color: #94a3b8;
+      font-size: 8.5px;
+      page-break-inside: avoid;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <div class="brand-title">UTSAV <span>Capital</span></div>
+      <div class="brand-subtitle">Curated Indian Seed VC & Angel Syndicate Directory</div>
+    </div>
+    <div class="meta-tag">
+      Target Round: <span class="tag-val">₹4.0 Cr ($500K) Seed</span><br>
+      Market TAM: <span class="tag-val">$130B (₹11 Lakh Cr)</span>
+    </div>
+  </div>
+
+  <!-- TIER 1 -->
+  <h2>
+    <span class="tier-badge tier-1">Tier 1</span>
+    High-Probability Institutional Seed VCs (Primary Roadshow)
+  </h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 4%;">#</th>
+        <th style="width: 20%;">Fund</th>
+        <th style="width: 22%;">Target Partner</th>
+        <th style="width: 28%;">Investment Thesis Fit</th>
+        <th style="width: 12%;">Cheque</th>
+        <th style="width: 14%;">Direct Portal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td class="fund-name">Blume Ventures</td>
+        <td class="partner-name">Karthik Reddy / Sanjay Nath</td>
+        <td>Deep domestic consumption thesis, marketplace infra, strong South India presence.</td>
+        <td><span class="cheque-tag">₹2–6 Cr</span></td>
+        <td><span class="link-text">blume.ventures/connect</span></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td class="fund-name">Kae Capital</td>
+        <td class="partner-name">Sasha Mirchandani / Gaurav C.</td>
+        <td>Pioneers in early vertical marketplaces and sticky operator workflows.</td>
+        <td><span class="cheque-tag">₹2–4 Cr</span></td>
+        <td><span class="link-text">kaecapital.com</span></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td class="fund-name">India Quotient</td>
+        <td class="partner-name">Anand Lunia / Madhukar Sinha</td>
+        <td>Dedicated to Bharat mass-market platforms solving high-cashflow real-world problems.</td>
+        <td><span class="cheque-tag">₹1–5 Cr</span></td>
+        <td><span class="link-text">indiaquotient.com</span></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td class="fund-name">100X.VC</td>
+        <td class="partner-name">Yagnesh Sanghrajka / Sanjay Mehta</td>
+        <td>First institutional cheque via standardized iSAFE notes to anchor round momentum.</td>
+        <td><span class="cheque-tag">₹1.25 Cr</span></td>
+        <td><span class="link-text">100x.vc/apply</span></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td class="fund-name">Titan Capital</td>
+        <td class="partner-name">Srini Krishnan / Kunal Shah</td>
+        <td>Consumer platforms, fintech escrow rails, and merchant workflow lock-in.</td>
+        <td><span class="cheque-tag">₹1–4 Cr</span></td>
+        <td><span class="link-text">titancapital.in</span></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td class="fund-name">Stellaris Venture Partners</td>
+        <td class="partner-name">Rahul Chowdhri</td>
+        <td>B2B SaaS + marketplace hybrids with high vendor retention.</td>
+        <td><span class="cheque-tag">₹3–8 Cr</span></td>
+        <td><span class="link-text">stellarisvp.com</span></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td class="fund-name">Elevation Capital</td>
+        <td class="partner-name">Ravi Adusumalli / Mayank Khanduja</td>
+        <td>Large-scale consumer platforms, category creators with high network effects.</td>
+        <td><span class="cheque-tag">₹5–15 Cr</span></td>
+        <td><span class="link-text">elevationcapital.com</span></td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td class="fund-name">Fireside Ventures</td>
+        <td class="partner-name">Kannan Sitaram</td>
+        <td>Consumer ecosystems, wedding consumption brands & tech aggregators.</td>
+        <td><span class="cheque-tag">₹2–6 Cr</span></td>
+        <td><span class="link-text">firesideventures.com</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- TIER 2 -->
+  <h2>
+    <span class="tier-badge tier-2">Tier 2</span>
+    Strategic Operator Angels & Micro-VC Syndicates
+  </h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 4%;">#</th>
+        <th style="width: 22%;">Angel / Micro-VC</th>
+        <th style="width: 22%;">Domain Background</th>
+        <th style="width: 26%;">Value Addition to UTSAV</th>
+        <th style="width: 12%;">Cheque</th>
+        <th style="width: 14%;">Access Route</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>9</td>
+        <td class="fund-name">Antler India</td>
+        <td class="partner-name">Operator-led Pre-Seed</td>
+        <td>Hands-on company building, global co-investor network access.</td>
+        <td><span class="cheque-tag">₹50L–2 Cr</span></td>
+        <td><span class="link-text">antler.co/india</span></td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td class="fund-name">Venture Catalysts</td>
+        <td class="partner-name">Multi-City Angel Syndicate</td>
+        <td>Local vendor syndication across Tier-1/2 cities.</td>
+        <td><span class="cheque-tag">₹1–5 Cr</span></td>
+        <td><span class="link-text">venturecatalysts.in</span></td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td class="fund-name">Java Capital</td>
+        <td class="partner-name">Marketplace & SaaS Fund</td>
+        <td>Pre-seed specialization in marketplace and vertical software models.</td>
+        <td><span class="cheque-tag">₹1–4 Cr</span></td>
+        <td><span class="link-text">javacapital.in</span></td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td class="fund-name">Mumbai Angels</td>
+        <td class="partner-name">Early Stage Network</td>
+        <td>HNIs with high hospitality, catering, and event industry exposure.</td>
+        <td><span class="cheque-tag">₹25L–2 Cr</span></td>
+        <td><span class="link-text">mumbaiangels.com</span></td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td class="fund-name">Indian Angel Network</td>
+        <td class="partner-name">Largest Angel Syndicate</td>
+        <td>Broad institutional syndicate backing with follow-on capability.</td>
+        <td><span class="cheque-tag">₹25L–3 Cr</span></td>
+        <td><span class="link-text">indianangelnetwork.com</span></td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td class="fund-name">LetsVenture</td>
+        <td class="partner-name">Syndicated Angel Platform</td>
+        <td>Fast rolling-close vehicle for angel tranches (₹10L–₹25L cheques).</td>
+        <td><span class="cheque-tag">₹25L–2 Cr</span></td>
+        <td><span class="link-text">letsventure.com</span></td>
+      </tr>
+      <tr>
+        <td>15</td>
+        <td class="fund-name">Kunal Shah</td>
+        <td class="partner-name">Founder, CRED</td>
+        <td>High-trust consumer UX, payment loops, fintech lending layer.</td>
+        <td><span class="cheque-tag">₹25L–1 Cr</span></td>
+        <td><span class="link-text">Mutual Founder Intro</span></td>
+      </tr>
+      <tr>
+        <td>16</td>
+        <td class="fund-name">Nithin Kamath</td>
+        <td class="partner-name">Founder, Zerodha / Rainmatter</td>
+        <td>Fintech payment infrastructure, milestone escrow, sustainable unit economics.</td>
+        <td><span class="cheque-tag">₹25L–1 Cr</span></td>
+        <td><span class="link-text">Mutual Founder Intro</span></td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td class="fund-name">Anupam Mittal</td>
+        <td class="partner-name">Founder, Shaadi.com</td>
+        <td>Lifecycle marketing for Indian weddings, consumer monetization master.</td>
+        <td><span class="cheque-tag">₹25L–2 Cr</span></td>
+        <td><span class="link-text">Mutual Founder Intro</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- PAGE BREAK FOR CLEAN PRINTING -->
+  <div class="page-break"></div>
+
+  <!-- HEADER PAGE 2 -->
+  <div class="header">
+    <div>
+      <div class="brand-title">UTSAV <span>Capital</span></div>
+      <div class="brand-subtitle">Accelerators & Institutional Outreach Protocols</div>
+    </div>
+    <div class="meta-tag">
+      Live Deck: <span class="tag-val">investorpitch-delta.vercel.app</span>
+    </div>
+  </div>
+
+  <!-- TIER 3 -->
+  <h2>
+    <span class="tier-badge tier-3">Tier 3</span>
+    Top Accelerators & Institutional Growth Programs
+  </h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 4%;">#</th>
+        <th style="width: 22%;">Program / Organization</th>
+        <th style="width: 38%;">Strategic Capital & Ecosystem Value</th>
+        <th style="width: 14%;">Typical Terms</th>
+        <th style="width: 22%;">Application URL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>18</td>
+        <td class="fund-name">Y Combinator (YC)</td>
+        <td>$500k standard deal + world's premier founder network and US/Global demo day.</td>
+        <td><span class="cheque-tag">$500k standard</span></td>
+        <td><span class="link-text">ycombinator.com/apply</span></td>
+      </tr>
+      <tr>
+        <td>19</td>
+        <td class="fund-name">Google for Startups Accelerator</td>
+        <td>Cloud infrastructure credits ($100K+), Google AI mentorship, Play Store feature access.</td>
+        <td><span class="cheque-tag">Equity-Free</span></td>
+        <td><span class="link-text">cloud.google.com/startup</span></td>
+      </tr>
+      <tr>
+        <td>20</td>
+        <td class="fund-name">Microsoft for Startups</td>
+        <td>Up to $150K Azure credits, enterprise co-sell opportunities, OpenAI API grants.</td>
+        <td><span class="cheque-tag">Equity-Free</span></td>
+        <td><span class="link-text">microsoft.com/startups</span></td>
+      </tr>
+      <tr>
+        <td>21</td>
+        <td class="fund-name">Nasscom 10,000 Startups</td>
+        <td>Access to government innovation councils, industry trade bodies, and enterprise pilots.</td>
+        <td><span class="cheque-tag">Grant / Support</span></td>
+        <td><span class="link-text">nasscom.in/startups</span></td>
+      </tr>
+      <tr>
+        <td>22</td>
+        <td class="fund-name">T-Hub Hyderabad</td>
+        <td>Telangana state government backing, marquee VC partner showcases, local venue tie-ups.</td>
+        <td><span class="cheque-tag">Incubation / Grant</span></td>
+        <td><span class="link-text">t-hub.co</span></td>
+      </tr>
+      <tr>
+        <td>23</td>
+        <td class="fund-name">SIDBI CGTMSE Tech Scheme</td>
+        <td>Collateral-free government debt funding up to ₹5 Cr for tech startups with IP.</td>
+        <td><span class="cheque-tag">Non-Dilutive Debt</span></td>
+        <td><span class="link-text">sidbi.in</span></td>
+      </tr>
+      <tr>
+        <td>24</td>
+        <td class="fund-name">Amazon Smbhav Venture Fund</td>
+        <td>$250M India fund targeting digitization of local retail, MSMEs, and service ecosystems.</td>
+        <td><span class="cheque-tag">Direct Equity</span></td>
+        <td><span class="link-text">amazon.in/smbhav</span></td>
+      </tr>
+      <tr>
+        <td>25</td>
+        <td class="fund-name">Accel India (Seed Scout)</td>
+        <td>Tier-1 venture platform with scout network for high-traction consumer marketplace rounds.</td>
+        <td><span class="cheque-tag">₹3–10 Cr</span></td>
+        <td><span class="link-text">accel.com/india</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- EXECUTIVE PROTOCOLS -->
+  <h2>Institutional Communication Templates (High-Status Protocol)</h2>
+
+  <div class="card">
+    <div class="card-title">1. The 3-Sentence Partner Forwarding Memo (For Mutual Founder / Warm Referrals)</div>
+    <p>Use this when a mutual portfolio founder or advisor introduces you to a VC partner:</p>
+    <blockquote>
+      "We built UTSAV — a vertical SaaS OS + milestone escrow platform for India's $130B unorganized wedding market. Unlike directories that sell low-intent ads, we take an 8.5% transaction rake and protect vendor advances. The mobile platform is live with real Cloud Firestore backend (29,400+ lines production Flutter code). We are raising ₹4 Cr Seed to lock South India. Interactive Deck: https://investorpitch-delta.vercel.app"
+    </blockquote>
+  </div>
+
+  <div class="card">
+    <div class="card-title">2. Direct Executive Outreach (For Strategic Angel Icons)</div>
+    <p>For top operators (Shaadi, CRED, Urban Company) where tone must be peer-to-peer and advisory-led:</p>
+    <blockquote>
+      "Hi [Name] — I'm Srinivas, building UTSAV (SaaS OS + vetted marketplace for India's $130B wedding economy). We've eliminated vendor default risk using milestone escrow and built the complete tech stack live on Flutter/Firebase. Raising ₹4 Cr Seed on ₹25 Cr post-money. Would value 15 mins for your operator feedback on consumer trust dynamics in high-ticket Indian transactions: https://investorpitch-delta.vercel.app"
+    </blockquote>
+  </div>
+
+  <!-- 45-DAY SPRINT -->
+  <h2>45-Day Institutional Syndication Sprint</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 20%;">Phase</th>
+        <th style="width: 40%;">Core Objectives</th>
+        <th style="width: 40%;">Deliverables & Proof Points</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="fund-name">Weeks 1 – 2</td>
+        <td>Anchor Angel & Strategic Commitments</td>
+        <td>Secure ₹50L–₹75L soft commits from 2 respected angels; prepare CapTable & live APK demo.</td>
+      </tr>
+      <tr>
+        <td class="fund-name">Weeks 3 – 4</td>
+        <td>Institutional VC Roadshow</td>
+        <td>10 targeted partner meetings via warm intros (Blume, Kae, IQ); secure Lead Term Sheet.</td>
+      </tr>
+      <tr>
+        <td class="fund-name">Weeks 5 – 6</td>
+        <td>Syndicate Allocation & Legal Close</td>
+        <td>Standardized SHA/iSAFE execution; capital disbursed; vendor acquisition launch in Hyderabad.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>UTSAV Technologies Pvt. Ltd. | Confidential & Proprietary | Founder: Srinivas Reddy</div>
+    <div>Live Production Platform & Data Room: investorpitch-delta.vercel.app</div>
+  </div>
+
+</body>
+</html>
