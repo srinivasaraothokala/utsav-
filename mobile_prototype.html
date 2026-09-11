@@ -1,0 +1,900 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<title>UTSAV — Customer App Prototype | Investor Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --saffron:#E65100;--saffron-b:#FF7043;--saffron-d:#BF360C;
+  --gold:#FFB300;--gold-b:#FFD54F;--gold-d:#E65100;
+  --emerald:#10B981;--rose:#EF4444;--blue:#3B82F6;--violet:#7C3AED;
+  --bg:#F4F6FA;--surface:#FFFFFF;--surface2:#F8FAFC;--surface3:#F1F5F9;
+  --text:#0F172A;--text2:#475569;--text3:#94A3B8;
+  --border:#E2E8F0;--border2:rgba(0,0,0,0.06);
+  --grad:linear-gradient(135deg,#FF7043 0%,#E65100 55%,#BF360C 100%);
+  --grad-gold:linear-gradient(135deg,#FFD54F,#FFB300);
+  --shadow-card:0 2px 16px rgba(0,0,0,0.08);
+  --phone-w:390px;--phone-h:844px;--r-phone:50px;
+  --shadow-phone:0 40px 100px -20px rgba(0,0,0,0.85),0 0 0 10px #1C1F26,0 0 0 12px #2E333F,0 0 60px rgba(230,81,0,0.15);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none}
+html{height:100%}
+body{
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  background:radial-gradient(ellipse at 30% 0%,rgba(230,81,0,0.12) 0%,transparent 60%),
+             radial-gradient(ellipse at 80% 100%,rgba(255,179,0,0.08) 0%,transparent 60%),
+             #0B0E17;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:32px 16px 48px;gap:24px;overflow-x:hidden;
+}
+/* HEADER */
+.demo-header{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:800px;}
+.demo-logo{font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;background:linear-gradient(135deg,#FF7043,#FFB300);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.demo-badge{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:30px;padding:6px 14px;color:rgba(255,255,255,0.7);font-size:12px;font-weight:600;}
+.demo-badge .dot{width:7px;height:7px;border-radius:50%;background:#10B981;animation:pulse-dot 2s infinite;}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,0.5)}50%{box-shadow:0 0 0 5px rgba(16,185,129,0)}}
+/* FLOW GUIDE */
+.flow-guide{display:flex;align-items:center;gap:0;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:40px;padding:6px 8px;}
+.flow-step{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:30px;cursor:pointer;transition:all .2s;font-size:11px;font-weight:600;color:rgba(255,255,255,0.4);}
+.flow-step.active{background:linear-gradient(135deg,#FF7043,#E65100);color:#fff;box-shadow:0 4px 12px rgba(230,81,0,0.4);}
+.flow-step .num{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;}
+.flow-step.active .num{background:rgba(255,255,255,0.25);}
+.flow-arrow{color:rgba(255,255,255,0.2);font-size:12px;padding:0 2px;}
+/* PHONE */
+.stage{display:flex;align-items:flex-start;justify-content:center;gap:40px;flex-wrap:wrap;}
+.phone-wrap{position:relative;width:var(--phone-w);height:var(--phone-h);border-radius:var(--r-phone);background:#0A0A0A;box-shadow:var(--shadow-phone);flex-shrink:0;overflow:hidden;}
+.phone-wrap::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:var(--r-phone);border:1.5px solid rgba(255,255,255,0.12);pointer-events:none;z-index:9999;}
+.btn-side{position:absolute;background:#1E222B;border-radius:3px;}
+.btn-side.power{right:-3px;top:140px;width:4px;height:70px;}
+.btn-side.vol1{left:-3px;top:120px;width:4px;height:44px;}
+.btn-side.vol2{left:-3px;top:174px;width:4px;height:44px;}
+.btn-side.mute{left:-3px;top:80px;width:4px;height:30px;}
+.status-bar{position:absolute;top:0;left:0;right:0;height:52px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 28px 8px;z-index:3000;pointer-events:none;font-size:13px;font-weight:700;color:#0F172A;}
+.status-bar.dark{color:#F8FAFC;}
+.dynamic-island{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:120px;height:34px;background:#000;border-radius:20px;display:flex;align-items:center;justify-content:center;gap:8px;z-index:3100;box-shadow:0 2px 12px rgba(0,0,0,0.6);}
+.di-cam{width:10px;height:10px;background:#111;border:1.5px solid #1A1A1A;border-radius:50%;}
+.di-text{font-family:'Outfit',sans-serif;font-size:10px;font-weight:800;color:#FFB300;letter-spacing:0.05em;}
+.home-ind{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);width:134px;height:5px;background:rgba(0,0,0,0.55);border-radius:3px;z-index:3000;pointer-events:none;}
+.home-ind.light{background:rgba(255,255,255,0.4);}
+.phone-screen{position:absolute;top:0;left:0;right:0;bottom:0;background:var(--bg);overflow:hidden;border-radius:var(--r-phone);}
+/* SCREENS */
+.scr{position:absolute;top:0;left:0;right:0;bottom:0;display:none;flex-direction:column;overflow:hidden;background:var(--bg);}
+.scr.active{display:flex;}
+.scr::-webkit-scrollbar{display:none;}
+.scroll-body{flex:1;overflow-y:auto;overflow-x:hidden;padding-bottom:72px;-webkit-overflow-scrolling:touch;}
+.scroll-body::-webkit-scrollbar{display:none;}
+/* TRANSITIONS */
+@keyframes slideRight{from{transform:translateX(-100%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes slideLeft{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes scalePop{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+.scr.anim-left{animation:slideLeft .28s cubic-bezier(0.16,1,0.3,1) forwards;}
+.scr.anim-right{animation:slideRight .28s cubic-bezier(0.16,1,0.3,1) forwards;}
+.scr.anim-up{animation:fadeUp .25s cubic-bezier(0.16,1,0.3,1) forwards;}
+.scr.anim-scale{animation:scalePop .28s cubic-bezier(0.16,1,0.3,1) forwards;}
+/* BOTTOM NAV */
+.bottom-nav{position:absolute;bottom:0;left:0;right:0;height:72px;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-around;padding:0 8px 8px;z-index:200;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;cursor:pointer;padding:8px 4px 4px;color:var(--text3);transition:all .2s;position:relative;}
+.nav-item svg{width:22px;height:22px;transition:all .2s;}
+.nav-item span{font-size:10px;font-weight:600;}
+.nav-item.active{color:var(--saffron);}
+.nav-item.active svg{transform:scale(1.1);}
+.nav-badge{position:absolute;top:6px;right:calc(50% - 20px);background:var(--rose);color:#fff;font-size:8px;font-weight:700;border-radius:8px;padding:1px 5px;border:1.5px solid #fff;}
+/* COMMON */
+.app-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px 10px;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+.hdr-title{font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:var(--text);}
+.back-btn{width:36px;height:36px;border-radius:12px;background:var(--surface3);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;}
+.back-btn:active{transform:scale(0.9);}
+.icon-btn{width:36px;height:36px;border-radius:12px;background:var(--surface3);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;position:relative;}
+.btn-primary{background:var(--grad);color:#fff;border:none;border-radius:14px;padding:14px 20px;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 20px rgba(230,81,0,0.35);transition:all .15s;}
+.btn-primary:active{transform:scale(0.97);}
+.btn-secondary{background:var(--surface3);color:var(--text);border:1px solid var(--border);border-radius:14px;padding:12px 20px;font-size:14px;font-weight:600;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .15s;}
+.btn-sm{background:var(--grad);color:#fff;border:none;border-radius:10px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .15s;box-shadow:0 3px 10px rgba(230,81,0,0.3);}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:30px;background:var(--surface3);border:1px solid var(--border);font-size:12px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .15s;white-space:nowrap;}
+.chip.active{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 2px 8px rgba(230,81,0,0.3);}
+.card{background:var(--surface);border-radius:18px;border:1px solid var(--border2);box-shadow:var(--shadow-card);overflow:hidden;}
+.badge-verified{display:inline-flex;align-items:center;gap:3px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25);border-radius:20px;padding:3px 8px;font-size:10px;font-weight:700;color:#10B981;}
+.badge-featured{display:inline-flex;align-items:center;gap:3px;background:rgba(255,179,0,0.12);border:1px solid rgba(255,179,0,0.3);border-radius:20px;padding:3px 8px;font-size:10px;font-weight:700;color:#B45309;}
+.star-row{display:flex;align-items:center;gap:3px;color:var(--gold);}
+.section-label{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:var(--text);display:flex;align-items:center;justify-content:space-between;padding:0 18px;margin-bottom:10px;}
+.see-all{font-size:12px;font-weight:600;color:var(--saffron);cursor:pointer;}
+.divider{height:1px;background:var(--border);margin:0 18px;}
+/* SPLASH */
+#scr-splash{background:radial-gradient(circle at 50% 35%,#1C0A00 0%,#0B0E17 70%);align-items:center;justify-content:center;}
+.splash-particles{position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;pointer-events:none;}
+.sp{position:absolute;border-radius:50%;background:#E65100;animation:floatP linear infinite;}
+@keyframes floatP{0%{transform:translateY(0) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-900px) rotate(720deg);opacity:0}}
+.splash-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:16px;}
+.splash-icon{width:96px;height:96px;border-radius:28px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 20px 50px rgba(230,81,0,0.5);animation:iconFloat 3s ease-in-out infinite;}
+@keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.splash-icon svg{width:52px;height:52px;color:#fff;}
+.splash-wordmark{font-family:'Outfit',sans-serif;font-size:42px;font-weight:900;letter-spacing:-0.02em;background:linear-gradient(135deg,#FF7043,#FFB300);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.splash-tagline{font-size:14px;color:rgba(255,255,255,0.5);font-weight:500;letter-spacing:0.04em;text-transform:uppercase;}
+.splash-loader{margin-top:32px;display:flex;gap:8px;}
+.splash-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);animation:loaderDot 1.2s infinite;}
+.splash-dot:nth-child(2){animation-delay:.2s;}
+.splash-dot:nth-child(3){animation-delay:.4s;}
+@keyframes loaderDot{0%,100%{background:rgba(255,255,255,0.2);transform:scale(1)}50%{background:#E65100;transform:scale(1.4)}}
+/* ONBOARDING */
+#scr-onboard{background:#0B0E17;}
+.onboard-visual{flex:0 0 55%;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.onboard-bg-circle{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(230,81,0,0.18),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);}
+.onboard-emoji{font-size:90px;line-height:1;animation:iconFloat 3s ease-in-out infinite;position:relative;z-index:1;}
+.onboard-text{padding:24px 28px;display:flex;flex-direction:column;gap:10px;}
+.onboard-label{display:inline-flex;align-items:center;gap:5px;background:rgba(230,81,0,0.15);border:1px solid rgba(230,81,0,0.3);border-radius:20px;padding:5px 12px;font-size:11px;font-weight:700;color:#FF7043;align-self:flex-start;}
+.onboard-title{font-family:'Outfit',sans-serif;font-size:26px;font-weight:800;color:#F8FAFC;line-height:1.2;}
+.onboard-desc{font-size:14px;color:rgba(248,250,252,0.55);line-height:1.6;}
+.onboard-dots{display:flex;gap:6px;margin-top:4px;}
+.od{width:24px;height:4px;border-radius:4px;background:rgba(255,255,255,0.15);transition:all .3s;}
+.od.active{width:36px;background:#E65100;}
+.onboard-actions{padding:20px 24px 40px;display:flex;flex-direction:column;gap:10px;}
+/* AUTH */
+#scr-auth{background:linear-gradient(180deg,#0B0E17 0%,#F4F6FA 40%);}
+.auth-hero{padding:70px 24px 28px;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.auth-title{font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:#F8FAFC;text-align:center;line-height:1.2;}
+.auth-sub{font-size:13px;color:rgba(248,250,252,0.5);text-align:center;}
+.auth-card{margin:0 18px;background:#fff;border-radius:24px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,0.25);}
+.auth-step{display:none;}
+.auth-step.show{display:flex;flex-direction:column;gap:14px;}
+.input-label{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:4px;}
+.phone-input{display:flex;gap:8px;align-items:center;}
+.phone-cc{padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface3);font-size:14px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap;}
+.input-field{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);font-size:14px;font-family:'Inter',sans-serif;color:var(--text);outline:none;transition:border-color .2s;}
+.input-field:focus{border-color:var(--saffron);}
+.auth-or{text-align:center;position:relative;color:var(--text3);font-size:12px;}
+.auth-or::before,.auth-or::after{content:'';position:absolute;top:50%;width:35%;height:1px;background:var(--border);}
+.auth-or::before{left:0;}
+.auth-or::after{right:0;}
+.social-row{display:flex;gap:10px;}
+.social-btn{flex:1;padding:11px;border-radius:12px;border:1.5px solid var(--border);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:600;color:var(--text);transition:all .15s;}
+.otp-grid{display:flex;gap:10px;justify-content:center;}
+.otp-box{width:54px;height:60px;border-radius:14px;border:2px solid var(--border);background:var(--surface3);font-size:22px;font-weight:700;color:var(--text);display:flex;align-items:center;justify-content:center;transition:border-color .2s;}
+.otp-box.filled{border-color:#E65100;background:rgba(230,81,0,0.05);}
+.resend-link{text-align:center;font-size:12px;color:var(--text3);}
+.resend-link b{color:var(--saffron);cursor:pointer;}
+/* HOME */
+#scr-home .home-top{background:linear-gradient(175deg,#1C0A00 0%,#3D1100 50%,#E65100 100%);padding:56px 18px 28px;position:relative;overflow:hidden;}
+.home-top-blur{position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,179,0,0.12);pointer-events:none;}
+.home-greeting{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.home-name{font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#fff;}
+.home-sub{font-size:13px;color:rgba(255,255,255,0.6);}
+.location-pill{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);border-radius:20px;padding:6px 12px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.85);cursor:pointer;margin-top:8px;align-self:flex-start;}
+.home-search{margin-top:14px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.95);border-radius:14px;padding:10px 14px;cursor:pointer;}
+.home-search span{font-size:14px;color:var(--text3);flex:1;}
+.filter-btn{width:40px;height:40px;border-radius:12px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(230,81,0,0.4);}
+.booking-strip{margin:14px 18px 0;padding:12px 16px;background:linear-gradient(135deg,rgba(255,179,0,0.1),rgba(230,81,0,0.08));border:1px solid rgba(255,179,0,0.3);border-radius:14px;display:flex;align-items:center;gap:10px;cursor:pointer;}
+.bs-icon{width:36px;height:36px;border-radius:10px;background:rgba(255,179,0,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#E65100;}
+.bs-title{font-size:13px;font-weight:700;color:var(--text);}
+.bs-sub{font-size:11px;color:var(--text2);}
+.cat-row{display:flex;gap:10px;padding:0 18px;overflow-x:auto;padding-bottom:4px;}
+.cat-row::-webkit-scrollbar{display:none;}
+.cat-item{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:68px;cursor:pointer;}
+.cat-icon{width:60px;height:60px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,0.08);transition:all .2s;border:1px solid var(--border2);}
+.cat-name{font-size:11px;font-weight:600;color:var(--text2);text-align:center;line-height:1.2;}
+.vendor-hscroll{display:flex;gap:14px;padding:0 18px;overflow-x:auto;padding-bottom:4px;}
+.vendor-hscroll::-webkit-scrollbar{display:none;}
+.vendor-card-h{min-width:210px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-card);border:1px solid var(--border2);cursor:pointer;transition:all .2s;flex-shrink:0;}
+.vendor-card-h:active{transform:scale(0.97);}
+.vch-img{width:100%;height:130px;object-fit:cover;display:flex;align-items:center;justify-content:center;font-size:40px;position:relative;}
+.vch-badge{position:absolute;top:8px;left:8px;background:rgba(16,185,129,0.9);color:#fff;font-size:9px;font-weight:700;border-radius:8px;padding:2px 7px;display:flex;align-items:center;gap:3px;}
+.vch-heart{position:absolute;top:8px;right:8px;width:28px;height:28px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.vch-body{padding:10px 12px;}
+.vch-name{font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.vch-meta{font-size:11px;color:var(--text3);margin-bottom:6px;}
+.vch-footer{display:flex;align-items:center;justify-content:space-between;}
+.vch-price{font-size:12px;font-weight:700;color:var(--saffron);}
+/* BROWSE */
+#scr-browse .browse-header{padding:56px 18px 14px;background:linear-gradient(175deg,#1C0A00 0%,#E65100 100%);}
+.browse-search{margin-top:12px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.95);border-radius:14px;padding:10px 14px;}
+.browse-search input{border:none;background:transparent;flex:1;font-size:14px;color:var(--text);outline:none;font-family:'Inter',sans-serif;}
+.chips-scroll{display:flex;gap:8px;padding:12px 18px;overflow-x:auto;}
+.chips-scroll::-webkit-scrollbar{display:none;}
+.vendor-card-v{margin:0 18px 12px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-card);border:1px solid var(--border2);display:flex;align-items:stretch;cursor:pointer;transition:all .2s;}
+.vendor-card-v:active{transform:scale(0.98);}
+.vcv-img{width:90px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:38px;background:linear-gradient(135deg,#FFF3E0,#FBE9E7);position:relative;}
+.vcv-img .vbadge{position:absolute;bottom:6px;left:6px;background:rgba(16,185,129,0.9);border-radius:6px;padding:2px 5px;font-size:8px;font-weight:700;color:#fff;}
+.vcv-body{padding:12px;flex:1;}
+.vcv-name{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.vcv-sub{font-size:11px;color:var(--text3);margin-bottom:6px;}
+.vcv-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
+.vcv-tag{background:var(--surface3);border-radius:6px;padding:2px 7px;font-size:10px;font-weight:600;color:var(--text2);}
+.vcv-footer{display:flex;align-items:center;justify-content:space-between;}
+.vcv-price{font-size:13px;font-weight:700;color:var(--saffron);}
+/* VENDOR DETAIL */
+#scr-vendor{background:#fff;}
+.vendor-hero{height:240px;background:linear-gradient(135deg,#1C0A00,#E65100);display:flex;align-items:center;justify-content:center;font-size:72px;position:relative;overflow:hidden;}
+.vendor-hero-back{position:absolute;top:56px;left:14px;width:36px;height:36px;background:rgba(0,0,0,0.4);border:none;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(8px);}
+.vendor-hero-like{position:absolute;top:56px;right:14px;width:36px;height:36px;background:rgba(0,0,0,0.4);border:none;border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(8px);}
+.vendor-body{padding:0 18px;flex:1;}
+.vendor-name{font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:var(--text);margin:16px 0 4px;}
+.vendor-loc{font-size:13px;color:var(--text3);display:flex;align-items:center;gap:4px;margin-bottom:10px;}
+.vendor-stats{display:flex;gap:10px;margin-bottom:14px;}
+.vstat{flex:1;text-align:center;padding:10px 8px;background:var(--surface2);border-radius:12px;border:1px solid var(--border);}
+.vstat-val{font-family:'Outfit',sans-serif;font-size:17px;font-weight:800;color:var(--text);}
+.vstat-lbl{font-size:10px;color:var(--text3);font-weight:600;}
+.gallery-scroll{display:flex;gap:8px;padding:0 18px;overflow-x:auto;margin-bottom:14px;}
+.gallery-scroll::-webkit-scrollbar{display:none;}
+.gallery-item{width:80px;height:80px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px;background:linear-gradient(135deg,#FFF3E0,#FBE9E7);border:1px solid var(--border);}
+.service-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer;}
+.si-icon{width:42px;height:42px;border-radius:12px;background:rgba(230,81,0,0.08);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.si-info{flex:1;}
+.si-name{font-size:14px;font-weight:600;color:var(--text);}
+.si-desc{font-size:11px;color:var(--text3);}
+.si-price{font-size:14px;font-weight:700;color:var(--saffron);}
+.si-select{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);cursor:pointer;}
+.si-select.selected{background:var(--saffron);border-color:var(--saffron);}
+.review-card{padding:12px 0;border-bottom:1px solid var(--border);}
+.rc-header{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.rc-avatar{width:36px;height:36px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0;}
+.rc-name{font-size:13px;font-weight:700;color:var(--text);}
+.rc-event{font-size:11px;color:var(--text3);}
+.rc-text{font-size:13px;color:var(--text2);line-height:1.5;}
+.vendor-sticky{position:sticky;bottom:0;padding:12px 18px 28px;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-top:1px solid var(--border);display:flex;align-items:center;gap:12px;z-index:200;}
+.vs-from{font-size:11px;color:var(--text3);}
+.vs-amount{font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:var(--text);}
+/* BOOKING */
+.booking-progress{padding:14px 18px;display:flex;align-items:center;gap:0;background:#fff;border-bottom:1px solid var(--border);}
+.bp-step{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.bp-circle{width:28px;height:28px;border-radius:50%;background:var(--surface3);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text3);}
+.bp-circle.done{background:#10B981;border-color:#10B981;color:#fff;}
+.bp-circle.active{background:var(--saffron);border-color:var(--saffron);color:#fff;}
+.bp-label{font-size:9px;font-weight:600;color:var(--text3);}
+.bp-label.active{color:var(--saffron);}
+.bp-line{flex:1;height:2px;background:var(--border);margin-top:-18px;}
+.bp-line.done{background:#10B981;}
+.booking-step{display:none;flex-direction:column;flex:1;}
+.booking-step.show{display:flex;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:0 18px;}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .15s;}
+.cal-day.empty{cursor:default;}
+.cal-day.today{border:1.5px solid var(--saffron);color:var(--saffron);}
+.cal-day.selected{background:var(--grad);color:#fff;box-shadow:0 2px 8px rgba(230,81,0,0.35);}
+.cal-day.disabled{color:var(--text3);cursor:not-allowed;}
+.cal-header-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;padding:0 18px;margin-bottom:4px;}
+.cal-header-day{text-align:center;font-size:11px;font-weight:700;color:var(--text3);}
+.time-slots{display:flex;gap:8px;flex-wrap:wrap;padding:0 18px;}
+.time-slot{padding:9px 14px;border-radius:10px;background:var(--surface3);border:1.5px solid var(--border);font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;transition:all .15s;}
+.time-slot.selected{background:rgba(230,81,0,0.08);border-color:var(--saffron);color:var(--saffron);}
+.time-slot.unavail{opacity:0.4;cursor:not-allowed;}
+/* PAYMENT */
+.escrow-banner{margin:0 18px 16px;padding:16px;background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(59,130,246,0.08));border:1px solid rgba(16,185,129,0.25);border-radius:16px;display:flex;gap:12px;align-items:flex-start;}
+.escrow-title{font-size:13px;font-weight:700;color:var(--text);}
+.escrow-desc{font-size:11px;color:var(--text2);line-height:1.5;}
+.escrow-badge{display:inline-flex;align-items:center;gap:4px;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.25);border-radius:20px;padding:3px 9px;font-size:10px;font-weight:700;color:#10B981;margin-top:6px;}
+.milestone-list{padding:0 18px;display:flex;flex-direction:column;gap:10px;margin-bottom:16px;}
+.milestone-item{background:#fff;border-radius:14px;padding:14px;border:1px solid var(--border);display:flex;align-items:center;gap:12px;}
+.mi-num{width:32px;height:32px;border-radius:50%;background:rgba(230,81,0,0.1);border:1.5px solid rgba(230,81,0,0.3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--saffron);flex-shrink:0;}
+.mi-name{font-size:13px;font-weight:700;color:var(--text);}
+.mi-when{font-size:11px;color:var(--text3);}
+.mi-amount{font-family:'Outfit',sans-serif;font-size:16px;font-weight:800;color:var(--text);}
+.mi-pct{font-size:10px;color:var(--text3);}
+.order-summary{margin:0 18px;background:#fff;border-radius:16px;padding:16px;border:1px solid var(--border);margin-bottom:16px;}
+.os-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px;color:var(--text2);}
+.os-row.total{font-size:15px;font-weight:700;color:var(--text);padding-top:8px;border-top:1px solid var(--border);}
+.payment-methods{padding:0 18px;margin-bottom:16px;}
+.pm-item{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;border:2px solid var(--border);cursor:pointer;transition:all .2s;margin-bottom:8px;}
+.pm-item.selected{border-color:var(--saffron);background:rgba(230,81,0,0.04);}
+.pm-icon{width:36px;height:36px;border-radius:10px;background:var(--surface3);display:flex;align-items:center;justify-content:center;font-size:18px;}
+.pm-label{flex:1;font-size:13px;font-weight:600;color:var(--text);}
+.pm-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);}
+.pm-radio.on{border-color:var(--saffron);background:radial-gradient(circle,#E65100 5px,transparent 5px);}
+/* SUCCESS */
+#scr-success{background:linear-gradient(180deg,#0B2818 0%,#F4F6FA 45%);align-items:center;}
+.success-anim{display:flex;flex-direction:column;align-items:center;gap:12px;padding:70px 24px 28px;}
+.success-ring{width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,0.15),transparent 70%);border:2px solid rgba(16,185,129,0.3);display:flex;align-items:center;justify-content:center;animation:scalePop .5s cubic-bezier(0.16,1,0.3,1) forwards;}
+.success-check{font-size:48px;}
+.success-title{font-family:'Outfit',sans-serif;font-size:26px;font-weight:800;color:#F8FAFC;text-align:center;}
+.success-sub{font-size:14px;color:rgba(248,250,252,0.55);text-align:center;line-height:1.5;}
+.success-card{margin:0 18px;background:#fff;border-radius:20px;padding:20px;box-shadow:0 20px 50px rgba(0,0,0,0.15);width:calc(100% - 36px);}
+.sc-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
+.sc-row:last-child{border-bottom:none;}
+.sc-icon{width:34px;height:34px;border-radius:10px;background:rgba(230,81,0,0.08);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.sc-label{font-size:11px;color:var(--text3);}
+.sc-value{font-size:13px;font-weight:700;color:var(--text);}
+/* BOOKINGS */
+.booking-tabs{display:flex;background:#fff;border-bottom:1px solid var(--border);}
+.btab{flex:1;padding:12px;text-align:center;font-size:13px;font-weight:600;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;}
+.btab.active{color:var(--saffron);border-bottom-color:var(--saffron);}
+.booking-item{margin:12px 18px 0;background:#fff;border-radius:18px;overflow:hidden;border:1px solid var(--border2);box-shadow:var(--shadow-card);cursor:pointer;}
+.bi-header{display:flex;align-items:center;gap:12px;padding:14px 14px 10px;}
+.bi-icon{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#FFF3E0,#FBE9E7);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.bi-name{font-size:14px;font-weight:700;color:var(--text);}
+.bi-date{font-size:11px;color:var(--text3);}
+.bi-status{padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700;}
+.bi-status.confirmed{background:rgba(16,185,129,0.1);color:#10B981;}
+.bi-status.pending{background:rgba(255,179,0,0.12);color:#B45309;}
+.milestone-tracker{padding:12px 14px 14px;}
+.mt-title{font-size:11px;font-weight:700;color:var(--text3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.05em;}
+.mt-steps{display:flex;position:relative;}
+.mt-step{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;}
+.mt-step::before{content:'';position:absolute;top:9px;left:50%;width:100%;height:2px;background:var(--border);z-index:0;}
+.mt-step:last-child::before{display:none;}
+.mt-dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);background:#fff;position:relative;z-index:1;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;}
+.mt-dot.done{background:#10B981;border-color:#10B981;color:#fff;}
+.mt-dot.active{background:var(--saffron);border-color:var(--saffron);color:#fff;box-shadow:0 0 0 4px rgba(230,81,0,0.15);}
+.mt-step.done::before{background:#10B981;}
+.mt-lbl{font-size:9px;font-weight:600;color:var(--text3);text-align:center;line-height:1.2;}
+.mt-lbl.done{color:#10B981;}
+.mt-lbl.active{color:var(--saffron);}
+/* PROFILE */
+.profile-hero{background:linear-gradient(175deg,#1C0A00,#E65100);padding:56px 18px 28px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.profile-avatar{width:80px;height:80px;border-radius:24px;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:#fff;font-family:'Outfit',sans-serif;}
+.profile-name{font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#fff;}
+.profile-phone{font-size:13px;color:rgba(255,255,255,0.6);}
+.profile-stats{display:flex;gap:20px;}
+.ps-val{font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#fff;}
+.ps-lbl{font-size:10px;color:rgba(255,255,255,0.6);font-weight:600;text-align:center;}
+.pm-section{padding:18px 18px 8px;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em;}
+.pm-row{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;transition:background .15s;}
+.pm-row:active{background:var(--surface3);}
+.pm-row-icon{width:36px;height:36px;border-radius:10px;background:rgba(230,81,0,0.08);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.pm-row-text{flex:1;font-size:14px;font-weight:600;color:var(--text);}
+.pm-row-sub{font-size:11px;color:var(--text3);}
+.pm-divider{height:1px;background:var(--border);margin:0 18px;}
+/* INFO */
+.screen-info{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:16px 20px;max-width:var(--phone-w);width:100%;display:flex;align-items:flex-start;gap:12px;}
+.si-dot{width:8px;height:8px;border-radius:50%;background:var(--saffron);flex-shrink:0;margin-top:4px;}
+.si-label{font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:2px;}
+.si-val{font-size:13px;color:rgba(255,255,255,0.85);font-weight:600;}
+@media(max-width:480px){
+  body{padding:0;background:#F4F6FA;}
+  .demo-header,.flow-guide,.screen-info{display:none;}
+  .phone-wrap{width:100vw;height:100dvh;border-radius:0;box-shadow:none;}
+  .btn-side{display:none;}
+  .phone-wrap::before{display:none;}
+}
+</style>
+</head>
+<body>
+<div class="demo-header">
+  <div class="demo-logo">UTSAV</div>
+  <div class="demo-badge"><div class="dot"></div>Customer App &middot; Investor Demo</div>
+</div>
+<div class="flow-guide" id="flowGuide">
+  <div class="flow-step active" id="fg-0" onclick="goFlow(0)"><div class="num">1</div>Browse</div>
+  <div class="flow-arrow">&rsaquo;</div>
+  <div class="flow-step" id="fg-1" onclick="goFlow(1)"><div class="num">2</div>Book</div>
+  <div class="flow-arrow">&rsaquo;</div>
+  <div class="flow-step" id="fg-2" onclick="goFlow(2)"><div class="num">3</div>Escrow Pay</div>
+  <div class="flow-arrow">&rsaquo;</div>
+  <div class="flow-step" id="fg-3" onclick="goFlow(3)"><div class="num">4</div>Track</div>
+</div>
+<div class="stage">
+<div class="phone-wrap" id="phoneWrap">
+  <div class="btn-side power"></div><div class="btn-side vol1"></div><div class="btn-side vol2"></div><div class="btn-side mute"></div>
+  <div class="status-bar" id="statusBar">
+    <span id="statusTime">9:41</span>
+    <div class="dynamic-island"><div class="di-cam"></div><div class="di-text">UTSAV</div></div>
+    <span>&#x1F4F6; &#x1F50B;</span>
+  </div>
+  <div class="home-ind" id="homeInd"></div>
+  <div class="phone-screen">
+
+<!-- SPLASH -->
+<div class="scr active" id="scr-splash">
+  <div class="splash-particles" id="splashParticles"></div>
+  <div class="splash-content">
+    <div class="splash-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+    <div class="splash-wordmark">UTSAV</div>
+    <div class="splash-tagline">Celebrate Better. Together.</div>
+    <div class="splash-loader"><div class="splash-dot"></div><div class="splash-dot"></div><div class="splash-dot"></div></div>
+  </div>
+</div>
+
+<!-- ONBOARDING -->
+<div class="scr" id="scr-onboard" style="background:#0B0E17;">
+  <div style="flex:1;display:flex;flex-direction:column;">
+    <div class="onboard-visual"><div class="onboard-bg-circle"></div><div class="onboard-emoji" id="onboardEmoji">&#x1F492;</div></div>
+    <div class="onboard-text">
+      <div class="onboard-label" id="onboardLabel">&#x2736; Discovery</div>
+      <div class="onboard-title" id="onboardTitle">Find Verified Vendors for Every Celebration</div>
+      <div class="onboard-desc" id="onboardDesc">Browse 500+ verified photographers, caterers, venues &amp; decorators &mdash; all rated, reviewed &amp; background-checked.</div>
+      <div class="onboard-dots"><div class="od active" id="od-0"></div><div class="od" id="od-1"></div><div class="od" id="od-2"></div></div>
+    </div>
+  </div>
+  <div class="onboard-actions">
+    <button class="btn-primary" id="onboardNext" onclick="nextOnboard()">Continue &rarr;</button>
+    <button class="btn-secondary" onclick="showScreen('auth','left')" style="background:transparent;border-color:rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);">Skip</button>
+  </div>
+</div>
+
+<!-- AUTH -->
+<div class="scr" id="scr-auth">
+  <div class="auth-hero">
+    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.65);">&#x1F512; 100% Secure Login</div>
+    <div class="auth-title">Welcome to UTSAV</div>
+    <div class="auth-sub">Log in to plan your perfect celebration</div>
+  </div>
+  <div class="auth-card">
+    <div class="auth-step show" id="auth-step-1">
+      <div>
+        <div class="input-label">Mobile Number</div>
+        <div class="phone-input">
+          <div class="phone-cc">&#x1F1EE;&#x1F1F3; +91</div>
+          <input type="tel" class="input-field" placeholder="98765 43210" style="flex:1" maxlength="10"/>
+        </div>
+      </div>
+      <div class="auth-or">or continue with</div>
+      <div class="social-row">
+        <button class="social-btn">G Google</button>
+        <button class="social-btn">&#xF8FF; Apple</button>
+      </div>
+      <button class="btn-primary" onclick="showOtp()">Send OTP &rarr;</button>
+    </div>
+    <div class="auth-step" id="auth-step-2">
+      <div style="text-align:center"><div style="font-size:13px;color:var(--text2);margin-bottom:4px;">OTP sent to</div><div style="font-size:15px;font-weight:700;color:var(--text);">+91 98765 43210</div></div>
+      <div class="otp-grid">
+        <div class="otp-box" id="otp-0">&mdash;</div><div class="otp-box" id="otp-1">&mdash;</div><div class="otp-box" id="otp-2">&mdash;</div><div class="otp-box" id="otp-3">&mdash;</div>
+      </div>
+      <div class="resend-link">Didn&rsquo;t receive? <b onclick="resendOtp()">Resend OTP</b></div>
+      <button class="btn-primary" onclick="verifyOtp()">Verify &amp; Login &rarr;</button>
+      <button class="btn-secondary" onclick="backToPhone()">&larr; Change Number</button>
+    </div>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="scr" id="scr-home">
+  <div class="home-top">
+    <div class="home-top-blur"></div>
+    <div class="home-greeting">
+      <div><div class="home-name">Good evening, Arjun &#x1F44B;</div><div class="home-sub">Your wedding is in 47 days!</div></div>
+      <button onclick="showScreen('notifications','left')" style="width:36px;height:36px;border-radius:12px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div style="position:absolute;top:6px;right:6px;width:8px;height:8px;background:#EF4444;border-radius:50%;border:2px solid transparent;"></div>
+      </button>
+    </div>
+    <div class="location-pill">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Hyderabad, Telangana
+    </div>
+    <div class="home-search" onclick="showScreen('browse','left')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span>Search photographers, caterers&hellip;</span>
+      <div class="filter-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
+    </div>
+  </div>
+  <div class="booking-strip" onclick="showScreen('mybookings','left')">
+    <div class="bs-icon">&#x1F3AC;</div>
+    <div style="flex:1;"><div class="bs-title">Lens &amp; Light Photography &middot; Active</div><div class="bs-sub">Wedding &middot; Nov 27 &middot; &#x20B9;65,000 &middot; Milestone 1 paid &#x2713;</div></div>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E65100" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+  </div>
+  <div class="scroll-body" style="padding-top:14px;">
+    <div class="section-label" style="margin-bottom:12px;">Categories <span class="see-all">See all</span></div>
+    <div class="cat-row">
+      <div class="cat-item" onclick="showScreen('browse','left')"><div class="cat-icon">&#x1F4F8;</div><div class="cat-name">Photography</div></div>
+      <div class="cat-item" onclick="showScreen('browse','left')"><div class="cat-icon">&#x1F37D;&#xFE0F;</div><div class="cat-name">Catering</div></div>
+      <div class="cat-item" onclick="showScreen('browse','left')"><div class="cat-icon">&#x1F3DB;&#xFE0F;</div><div class="cat-name">Venues</div></div>
+      <div class="cat-item" onclick="showScreen('browse','left')"><div class="cat-icon">&#x1F338;</div><div class="cat-name">Decor</div></div>
+      <div class="cat-item" onclick="showScreen('browse','left')"><div class="cat-icon">&#x1F483;</div><div class="cat-name">Mehendi</div></div>
+      <div class="cat-item" onclick="showScreen('browse','left')"><div class="cat-icon">&#x1F3B5;</div><div class="cat-name">Music</div></div>
+      <div class="cat-item" onclick="showScreen('browse','left')"><div class="cat-icon">&#x1F484;</div><div class="cat-name">Makeup</div></div>
+    </div>
+    <div style="height:18px;"></div>
+    <div class="section-label">Featured Vendors <span class="see-all" onclick="showScreen('browse','left')">See all</span></div>
+    <div class="vendor-hscroll">
+      <div class="vendor-card-h" onclick="showScreen('vendor','left')">
+        <div class="vch-img" style="background:linear-gradient(135deg,#1C0A00,#E65100);">&#x1F4F8;<div class="vch-badge">&#x2713; Verified</div><div class="vch-heart">&#x2764;&#xFE0F;</div></div>
+        <div class="vch-body"><div class="vch-name">Lens &amp; Light Studios</div><div class="vch-meta">&#x1F4CD; Banjara Hills &middot; 148 reviews</div><div class="vch-footer"><div class="star-row">&#x2B50; <b>4.9</b><span style="color:var(--text2);font-size:11px;">(148)</span></div><div class="vch-price">&#x20B9;45,000+</div></div></div>
+      </div>
+      <div class="vendor-card-h" onclick="showScreen('vendor','left')">
+        <div class="vch-img" style="background:linear-gradient(135deg,#0B2818,#059669);">&#x1F37D;&#xFE0F;<div class="vch-badge">&#x2713; Verified</div><div class="vch-heart">&#x1F90D;</div></div>
+        <div class="vch-body"><div class="vch-name">Royal Feasts Catering</div><div class="vch-meta">&#x1F4CD; Jubilee Hills &middot; 212 reviews</div><div class="vch-footer"><div class="star-row">&#x2B50; <b>4.8</b></div><div class="vch-price">&#x20B9;850/plate</div></div></div>
+      </div>
+      <div class="vendor-card-h" onclick="showScreen('vendor','left')">
+        <div class="vch-img" style="background:linear-gradient(135deg,#1E1B4B,#7C3AED);">&#x1F338;<div class="vch-badge">&#x2713; Verified</div><div class="vch-heart">&#x2764;&#xFE0F;</div></div>
+        <div class="vch-body"><div class="vch-name">Bloom Decor Co.</div><div class="vch-meta">&#x1F4CD; Gachibowli &middot; 89 reviews</div><div class="vch-footer"><div class="star-row">&#x2B50; <b>4.7</b></div><div class="vch-price">&#x20B9;35,000+</div></div></div>
+      </div>
+    </div>
+    <div style="height:18px;"></div>
+    <div style="margin:0 18px;padding:16px;background:#fff;border-radius:16px;border:1px solid var(--border2);box-shadow:var(--shadow-card);">
+      <div style="font-size:11px;font-weight:700;color:var(--text3);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.05em;">Why UTSAV?</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="display:flex;gap:8px;"><div style="font-size:18px;">&#x1F6E1;&#xFE0F;</div><div><div style="font-size:12px;font-weight:700;color:var(--text);">Escrow Protection</div><div style="font-size:10px;color:var(--text3);">Pay only on milestones</div></div></div>
+        <div style="display:flex;gap:8px;"><div style="font-size:18px;">&#x2705;</div><div><div style="font-size:12px;font-weight:700;color:var(--text);">Verified Vendors</div><div style="font-size:10px;color:var(--text3);">Background checked</div></div></div>
+        <div style="display:flex;gap:8px;"><div style="font-size:18px;">&#x1F4AC;</div><div><div style="font-size:12px;font-weight:700;color:var(--text);">Real Reviews</div><div style="font-size:10px;color:var(--text3);">Verified buyers only</div></div></div>
+        <div style="display:flex;gap:8px;"><div style="font-size:18px;">&#x1F4F1;</div><div><div style="font-size:12px;font-weight:700;color:var(--text);">Live Tracking</div><div style="font-size:10px;color:var(--text3);">Every delivery step</div></div></div>
+      </div>
+    </div>
+    <div style="height:8px;"></div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="showScreen('home','scale')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></div>
+    <div class="nav-item" onclick="showScreen('browse','left')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>Explore</span></div>
+    <div class="nav-item" onclick="showScreen('mybookings','left')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Bookings</span><div class="nav-badge">1</div></div>
+    <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>Saved</span></div>
+    <div class="nav-item" onclick="showScreen('profile','left')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></div>
+  </div>
+</div>
+
+<!-- BROWSE -->
+<div class="scr" id="scr-browse">
+  <div class="browse-header">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+      <button class="back-btn" style="background:rgba(255,255,255,0.12);border:none;" onclick="showScreen('home','right')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <div style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:#fff;">Wedding Vendors</div>
+      <button class="back-btn" style="background:rgba(255,255,255,0.12);border:none;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/></svg></button>
+    </div>
+    <div class="browse-search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input placeholder="Search vendors, categories&hellip;"/></div>
+  </div>
+  <div class="chips-scroll"><div class="chip active">All</div><div class="chip">&#x1F4F8; Photography</div><div class="chip">&#x1F37D;&#xFE0F; Catering</div><div class="chip">&#x1F3DB;&#xFE0F; Venues</div><div class="chip">&#x1F338; Decor</div><div class="chip">&#x1F483; Mehendi</div></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 18px 8px;"><div style="font-size:12px;color:var(--text3);font-weight:600;">124 vendors in Hyderabad</div><div style="font-size:12px;font-weight:600;color:var(--saffron);cursor:pointer;">Sort &#x21D5;</div></div>
+  <div style="flex:1;overflow-y:auto;padding-bottom:80px;">
+    <div class="vendor-card-v" onclick="showScreen('vendor','left')">
+      <div class="vcv-img">&#x1F4F8;<div class="vbadge">&#x2713;</div></div>
+      <div class="vcv-body"><div class="vcv-name">Lens &amp; Light Studios</div><div class="vcv-sub">&#x1F4CD; Banjara Hills, Hyderabad</div><div class="vcv-tags"><div class="vcv-tag">Wedding</div><div class="vcv-tag">Pre-Wedding</div><div class="vcv-tag">Drone</div></div><div class="vcv-footer"><div class="vcv-price">from &#x20B9;45,000</div><div style="display:flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--text2);"><span style="color:var(--gold);">&#x2605;</span> 4.9 &middot; 148 reviews</div></div></div>
+    </div>
+    <div class="vendor-card-v" onclick="showScreen('vendor','left')">
+      <div class="vcv-img" style="background:linear-gradient(135deg,#FFF3E0,#FBE9E7);">&#x1F3AC;<div class="vbadge">&#x2713;</div></div>
+      <div class="vcv-body"><div class="vcv-name">Cinematic Frames Co.</div><div class="vcv-sub">&#x1F4CD; Jubilee Hills, Hyderabad</div><div class="vcv-tags"><div class="vcv-tag">Cinematic</div><div class="vcv-tag">Reels</div></div><div class="vcv-footer"><div class="vcv-price">from &#x20B9;65,000</div><div style="display:flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--text2);"><span style="color:var(--gold);">&#x2605;</span> 4.8 &middot; 97 reviews</div></div></div>
+    </div>
+    <div class="vendor-card-v" onclick="showScreen('vendor','left')">
+      <div class="vcv-img" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);">&#x1F4F7;<div class="vbadge">&#x2713;</div></div>
+      <div class="vcv-body"><div class="vcv-name">Golden Hour Photography</div><div class="vcv-sub">&#x1F4CD; Madhapur, Hyderabad</div><div class="vcv-tags"><div class="vcv-tag">Candid</div><div class="vcv-tag">Album</div></div><div class="vcv-footer"><div class="vcv-price">from &#x20B9;28,000</div><div style="display:flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--text2);"><span style="color:var(--gold);">&#x2605;</span> 4.7 &middot; 203 reviews</div></div></div>
+    </div>
+    <div class="vendor-card-v" onclick="showScreen('vendor','left')">
+      <div class="vcv-img" style="background:linear-gradient(135deg,#EEF2FF,#E0E7FF);">&#x1F338;<div class="vbadge">&#x2713;</div></div>
+      <div class="vcv-body"><div class="vcv-name">Bloom Decor Co.</div><div class="vcv-sub">&#x1F4CD; Gachibowli, Hyderabad</div><div class="vcv-tags"><div class="vcv-tag">Floral</div><div class="vcv-tag">Mandap</div><div class="vcv-tag">Stage</div></div><div class="vcv-footer"><div class="vcv-price">from &#x20B9;35,000</div><div style="display:flex;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--text2);"><span style="color:var(--gold);">&#x2605;</span> 4.7 &middot; 89 reviews</div></div></div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="showScreen('home','right')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></div>
+    <div class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>Explore</span></div>
+    <div class="nav-item" onclick="showScreen('mybookings','left')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Bookings</span></div>
+    <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>Saved</span></div>
+    <div class="nav-item" onclick="showScreen('profile','left')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></div>
+  </div>
+</div>
+
+<!-- VENDOR DETAIL -->
+<div class="scr" id="scr-vendor" style="overflow-y:auto;overflow-x:hidden;background:#fff;">
+  <div class="vendor-hero">
+    <div style="position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,0.04);"></div>
+    <div style="font-size:80px;position:relative;z-index:1;">&#x1F4F8;</div>
+    <button class="vendor-hero-back" onclick="showScreen('browse','right')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button class="vendor-hero-like"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+  </div>
+  <div style="padding-bottom:100px;">
+    <div class="vendor-body">
+      <div class="vendor-name">Lens &amp; Light Studios</div>
+      <div class="vendor-loc"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Banjara Hills, Hyderabad</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;"><div class="badge-verified">&#x2713; Verified Vendor</div><div class="badge-featured">&#x2B50; Top Rated 2024</div></div>
+      <div class="vendor-stats">
+        <div class="vstat"><div class="vstat-val" style="color:var(--gold);">4.9</div><div class="vstat-lbl">Rating</div></div>
+        <div class="vstat"><div class="vstat-val">148</div><div class="vstat-lbl">Reviews</div></div>
+        <div class="vstat"><div class="vstat-val">7yr</div><div class="vstat-lbl">Experience</div></div>
+        <div class="vstat"><div class="vstat-val">580+</div><div class="vstat-lbl">Events</div></div>
+      </div>
+    </div>
+    <div class="section-label">Gallery</div>
+    <div class="gallery-scroll"><div class="gallery-item">&#x1F492;</div><div class="gallery-item">&#x1F48D;</div><div class="gallery-item">&#x1F339;</div><div class="gallery-item">&#x1F38A;</div><div class="gallery-item">&#x2728;</div><div class="gallery-item">&#x1F942;</div></div>
+    <div class="section-label" style="margin-top:4px;">Services</div>
+    <div style="padding:0 18px;">
+      <div class="service-item"><div class="si-icon">&#x1F492;</div><div class="si-info"><div class="si-name">Wedding Photography</div><div class="si-desc">Full day &middot; 2 photographers &middot; 500+ edited photos</div></div><div class="si-price">&#x20B9;45,000</div><div class="si-select" id="svc-w"></div></div>
+      <div class="service-item"><div class="si-icon">&#x1F305;</div><div class="si-info"><div class="si-name">Pre-Wedding Shoot</div><div class="si-desc">Half day &middot; 1 location &middot; 100 edited photos</div></div><div class="si-price">&#x20B9;18,000</div><div class="si-select" id="svc-p"></div></div>
+      <div class="service-item"><div class="si-icon">&#x1F3AC;</div><div class="si-info"><div class="si-name">Cinematic Wedding Film</div><div class="si-desc">Full day &middot; 4K &middot; 10-min highlight reel</div></div><div class="si-price">&#x20B9;35,000</div><div class="si-select" id="svc-v"></div></div>
+      <div class="service-item"><div class="si-icon">&#x1F681;</div><div class="si-info"><div class="si-name">Drone Aerial Coverage</div><div class="si-desc">Add-on &middot; 1hr &middot; 4K aerial footage</div></div><div class="si-price">&#x20B9;8,000</div><div class="si-select" id="svc-d"></div></div>
+    </div>
+    <div class="section-label" style="margin-top:8px;">Reviews <span class="see-all">See all 148</span></div>
+    <div style="padding:0 18px;">
+      <div class="review-card"><div class="rc-header"><div class="rc-avatar">P</div><div><div class="rc-name">Priya Sharma</div><div class="rc-event">Wedding &middot; Oct 2024</div></div><div style="margin-left:auto;font-size:12px;color:var(--gold);">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</div></div><div class="rc-text">"Absolutely stunning work! They captured every emotion perfectly. Delivery on time as promised through UTSAV Escrow."</div></div>
+      <div class="review-card"><div class="rc-header"><div class="rc-avatar" style="background:linear-gradient(135deg,#3B82F6,#1E3C72);">R</div><div><div class="rc-name">Rahul &amp; Meena</div><div class="rc-event">Wedding &middot; Sep 2024</div></div><div style="margin-left:auto;font-size:12px;color:var(--gold);">&#x2B50;&#x2B50;&#x2B50;&#x2B50;&#x2B50;</div></div><div class="rc-text">"The escrow payment gave us so much peace of mind. Paid milestone by milestone and everything was delivered as promised!"</div></div>
+    </div>
+  </div>
+  <div class="vendor-sticky">
+    <div style="flex:1;"><div class="vs-from">Starting from</div><div><span class="vs-amount">&#x20B9;45,000</span><span style="font-size:11px;color:var(--text3);">/day</span></div></div>
+    <div style="flex:1.5;"><button class="btn-primary" onclick="showScreen('booking','left')">Book Now &rarr;</button></div>
+  </div>
+</div>
+
+<!-- BOOKING FLOW -->
+<div class="scr" id="scr-booking">
+  <div class="app-header">
+    <button class="back-btn" onclick="showScreen('vendor','right')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="hdr-title">Book Vendor</div><div style="width:36px;"></div>
+  </div>
+  <div class="booking-progress">
+    <div class="bp-step"><div class="bp-circle active" id="bp-1">1</div><div class="bp-label active" id="bpl-1">Service</div></div>
+    <div class="bp-line" id="bpline-1"></div>
+    <div class="bp-step"><div class="bp-circle" id="bp-2">2</div><div class="bp-label" id="bpl-2">Date</div></div>
+    <div class="bp-line" id="bpline-2"></div>
+    <div class="bp-step"><div class="bp-circle" id="bp-3">3</div><div class="bp-label" id="bpl-3">Confirm</div></div>
+  </div>
+  <!-- Step 1 -->
+  <div class="booking-step show" id="booking-step-1" style="overflow-y:auto;padding-bottom:90px;">
+    <div style="padding:16px 18px 10px;">
+      <div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:12px;">Select a service package:</div>
+      <div class="card" style="padding:14px;margin-bottom:10px;cursor:pointer;border:2px solid var(--saffron);" id="pkg-0" onclick="selectPkg(0)">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><div style="font-size:14px;font-weight:700;color:var(--text);">&#x1F492; Wedding Photography</div><div style="width:20px;height:20px;border-radius:50%;background:var(--saffron);display:flex;align-items:center;justify-content:center;" id="pkg-radio-0"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div></div>
+        <div style="font-size:12px;color:var(--text3);margin-bottom:8px;">Full day &middot; 2 photographers &middot; 500+ edited photos &middot; Album</div>
+        <div style="font-size:18px;font-weight:800;font-family:'Outfit',sans-serif;color:var(--saffron);">&#x20B9;45,000</div>
+      </div>
+      <div class="card" style="padding:14px;margin-bottom:10px;cursor:pointer;border:2px solid var(--border);" id="pkg-1" onclick="selectPkg(1)">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><div style="font-size:14px;font-weight:700;color:var(--text);">&#x1F3AC; Wedding Photo + Video</div><div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--border);" id="pkg-radio-1"></div></div>
+        <div style="font-size:12px;color:var(--text3);margin-bottom:8px;">Full day &middot; Photo + Cinematic film &middot; 4K &middot; Highlight reel</div>
+        <div style="font-size:18px;font-weight:800;font-family:'Outfit',sans-serif;color:var(--saffron);">&#x20B9;75,000</div>
+      </div>
+      <div class="card" style="padding:14px;margin-bottom:10px;cursor:pointer;border:2px solid var(--border);" id="pkg-2" onclick="selectPkg(2)">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><div style="font-size:14px;font-weight:700;color:var(--text);">&#x1F681; Premium + Drone</div><div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--border);" id="pkg-radio-2"></div></div>
+        <div style="font-size:12px;color:var(--text3);margin-bottom:8px;">Everything + Drone aerial &middot; 4K &middot; Special effects edit</div>
+        <div style="font-size:18px;font-weight:800;font-family:'Outfit',sans-serif;color:var(--saffron);">&#x20B9;90,000</div>
+      </div>
+    </div>
+    <div style="position:sticky;bottom:0;padding:12px 18px 24px;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-top:1px solid var(--border);">
+      <button class="btn-primary" onclick="nextBookingStep(2)">Next: Choose Date &rarr;</button>
+    </div>
+  </div>
+  <!-- Step 2 -->
+  <div class="booking-step" id="booking-step-2" style="overflow-y:auto;padding-bottom:90px;">
+    <div style="padding:16px 0 10px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:0 18px;margin-bottom:12px;">
+        <button style="width:32px;height:32px;border-radius:10px;background:var(--surface3);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;">&#x2039;</button>
+        <div style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:var(--text);">November 2026</div>
+        <button style="width:32px;height:32px;border-radius:10px;background:var(--surface3);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;">&#x203A;</button>
+      </div>
+      <div class="cal-header-days"><div class="cal-header-day">Su</div><div class="cal-header-day">Mo</div><div class="cal-header-day">Tu</div><div class="cal-header-day">We</div><div class="cal-header-day">Th</div><div class="cal-header-day">Fr</div><div class="cal-header-day">Sa</div></div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div style="padding:16px 18px 10px;"><div style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:8px;">Select start time:</div>
+      <div class="time-slots"><div class="time-slot">6:00 AM</div><div class="time-slot selected">7:00 AM</div><div class="time-slot">8:00 AM</div><div class="time-slot unavail">9:00 AM</div><div class="time-slot unavail">10:00 AM</div><div class="time-slot">11:00 AM</div></div></div>
+      <div style="padding:0 18px;"><div style="padding:12px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:12px;font-size:12px;color:#10B981;display:flex;align-items:center;gap:8px;">&#x2705; Nov 27 is available &mdash; 7:00 AM start confirmed</div></div>
+    </div>
+    <div style="position:sticky;bottom:0;padding:12px 18px 24px;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-top:1px solid var(--border);display:flex;gap:10px;">
+      <button class="btn-secondary" style="flex:1;" onclick="nextBookingStep(1)">&larr; Back</button>
+      <button class="btn-primary" style="flex:2;" onclick="nextBookingStep(3)">Review &amp; Pay &rarr;</button>
+    </div>
+  </div>
+  <!-- Step 3 -->
+  <div class="booking-step" id="booking-step-3" style="overflow-y:auto;padding-bottom:90px;">
+    <div style="padding:16px 18px;">
+      <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:14px;">Booking Summary</div>
+      <div class="card" style="padding:14px;margin-bottom:14px;">
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;"><div style="font-size:32px;">&#x1F4F8;</div><div><div style="font-size:14px;font-weight:700;color:var(--text);">Lens &amp; Light Studios</div><div style="font-size:12px;color:var(--text3);">Banjara Hills, Hyderabad</div></div><div class="badge-verified" style="margin-left:auto;">&#x2713;</div></div>
+        <div class="divider" style="margin:0 0 10px;"></div>
+        <div style="font-size:13px;color:var(--text2);display:flex;flex-direction:column;gap:6px;">
+          <div style="display:flex;justify-content:space-between;"><span>Package</span><b style="color:var(--text);">&#x1F492; Wedding Photography</b></div>
+          <div style="display:flex;justify-content:space-between;"><span>Date</span><b style="color:var(--text);">November 27, 2026</b></div>
+          <div style="display:flex;justify-content:space-between;"><span>Time</span><b style="color:var(--text);">7:00 AM &ndash; 9:00 PM</b></div>
+          <div style="display:flex;justify-content:space-between;"><span>Photographers</span><b style="color:var(--text);">2 professionals</b></div>
+        </div>
+      </div>
+    </div>
+    <div style="position:sticky;bottom:0;padding:12px 18px 24px;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-top:1px solid var(--border);display:flex;gap:10px;">
+      <button class="btn-secondary" style="flex:1;" onclick="nextBookingStep(2)">&larr; Back</button>
+      <button class="btn-primary" style="flex:2;" onclick="showScreen('payment','left')">Proceed to Pay &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENT / ESCROW -->
+<div class="scr" id="scr-payment">
+  <div class="app-header"><button class="back-btn" onclick="showScreen('booking','right')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="hdr-title">Secure Payment</div><div style="width:36px;"></div></div>
+  <div style="flex:1;overflow-y:auto;padding-top:14px;padding-bottom:90px;">
+    <div class="escrow-banner">
+      <div style="font-size:28px;flex-shrink:0;">&#x1F6E1;&#xFE0F;</div>
+      <div><div class="escrow-title">UTSAV Milestone Escrow&trade;</div><div class="escrow-desc">Your money is held securely by UTSAV and released to the vendor only when each milestone is completed &mdash; like RBI-regulated escrow.</div><div class="escrow-badge">&#x2713; RBI-Compliant &middot; Zero Risk</div></div>
+    </div>
+    <div class="section-label">Payment Milestones</div>
+    <div class="milestone-list">
+      <div class="milestone-item"><div class="mi-num">1</div><div style="flex:1;"><div class="mi-name">Booking Advance</div><div class="mi-when">&#x1F4C5; Pay now to confirm your slot</div></div><div style="text-align:right;"><div class="mi-amount">&#x20B9;11,250</div><div class="mi-pct">25% of total</div></div></div>
+      <div class="milestone-item" style="opacity:0.6;"><div class="mi-num">2</div><div style="flex:1;"><div class="mi-name">On Event Day</div><div class="mi-when">&#x1F4C5; Released when photographer arrives</div></div><div style="text-align:right;"><div class="mi-amount">&#x20B9;22,500</div><div class="mi-pct">50% of total</div></div></div>
+      <div class="milestone-item" style="opacity:0.6;"><div class="mi-num">3</div><div style="flex:1;"><div class="mi-name">Photo Delivery</div><div class="mi-when">&#x1F4C5; After you approve edited photos</div></div><div style="text-align:right;"><div class="mi-amount">&#x20B9;11,250</div><div class="mi-pct">25% of total</div></div></div>
+    </div>
+    <div class="section-label">Order Summary</div>
+    <div class="order-summary">
+      <div class="os-row"><span>Wedding Photography Package</span><span>&#x20B9;45,000</span></div>
+      <div class="os-row"><span>UTSAV Platform Fee (2%)</span><span>&#x20B9;900</span></div>
+      <div class="os-row"><span>GST (18% on fee)</span><span>&#x20B9;162</span></div>
+      <div class="os-row total"><span>Total</span><b>&#x20B9;46,062</b></div>
+      <div class="os-row" style="color:var(--saffron);font-weight:700;"><span>Pay now (Milestone 1)</span><b>&#x20B9;11,250</b></div>
+    </div>
+    <div class="section-label">Payment Method</div>
+    <div class="payment-methods">
+      <div class="pm-item selected" id="pm-upi" onclick="selectPM('upi')"><div class="pm-icon">&#x1F4F2;</div><div><div class="pm-label">UPI</div><div style="font-size:11px;color:var(--text3);">GPay, PhonePe, Paytm&hellip;</div></div><div class="pm-radio on" id="pmr-upi"></div></div>
+      <div class="pm-item" id="pm-card" onclick="selectPM('card')"><div class="pm-icon">&#x1F4B3;</div><div><div class="pm-label">Credit / Debit Card</div><div style="font-size:11px;color:var(--text3);">Visa, Mastercard, RuPay</div></div><div class="pm-radio" id="pmr-card"></div></div>
+      <div class="pm-item" id="pm-net" onclick="selectPM('net')"><div class="pm-icon">&#x1F3E6;</div><div><div class="pm-label">Net Banking</div><div style="font-size:11px;color:var(--text3);">All major banks supported</div></div><div class="pm-radio" id="pmr-net"></div></div>
+    </div>
+  </div>
+  <div style="padding:12px 18px 28px;background:rgba(255,255,255,0.97);backdrop-filter:blur(12px);border-top:1px solid var(--border);">
+    <button class="btn-primary" onclick="processPayment()">&#x1F512; Pay &#x20B9;11,250 Securely</button>
+    <div style="text-align:center;font-size:11px;color:var(--text3);margin-top:8px;">&#x1F6E1;&#xFE0F; Protected by UTSAV Escrow &mdash; money released only on delivery</div>
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div class="scr" id="scr-success" style="align-items:center;background:linear-gradient(180deg,#0B2818 0%,#F4F6FA 45%);">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:12px;padding:70px 24px 28px;">
+    <div class="success-ring"><div class="success-check">&#x2705;</div></div>
+    <div class="success-title">Booking Confirmed!</div>
+    <div style="font-size:14px;color:rgba(248,250,252,0.55);text-align:center;line-height:1.5;">&#x20B9;11,250 held securely in UTSAV Escrow&trade;<br/>Lens &amp; Light Studios has been notified.</div>
+  </div>
+  <div style="margin:0 18px;background:#fff;border-radius:20px;padding:20px;box-shadow:0 20px 50px rgba(0,0,0,0.15);width:calc(100% - 36px);">
+    <div style="text-align:center;font-size:12px;color:var(--text3);margin-bottom:14px;">Booking ID: <b style="color:var(--text);">#UTH-20261127-4892</b></div>
+    <div class="sc-row"><div class="sc-icon">&#x1F4F8;</div><div><div class="sc-label">Vendor</div><div class="sc-value">Lens &amp; Light Studios</div></div></div>
+    <div class="sc-row"><div class="sc-icon">&#x1F4C5;</div><div><div class="sc-label">Event Date</div><div class="sc-value">November 27, 2026 &middot; 7:00 AM</div></div></div>
+    <div class="sc-row"><div class="sc-icon">&#x1F4B3;</div><div><div class="sc-label">Paid (Milestone 1)</div><div class="sc-value" style="color:#10B981;">&#x20B9;11,250 &middot; UPI &#x2713;</div></div></div>
+    <div class="sc-row"><div class="sc-icon">&#x1F6E1;&#xFE0F;</div><div><div class="sc-label">Escrow Balance</div><div class="sc-value">&#x20B9;34,812 remaining in 2 milestones</div></div></div>
+  </div>
+  <div style="margin:14px 18px 0;padding:12px 14px;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:12px;font-size:12px;color:#10B981;font-weight:600;display:flex;align-items:center;gap:8px;">&#x1F512; Your remaining &#x20B9;34,812 is protected &mdash; released only when you approve each milestone.</div>
+  <div style="padding:16px 18px;display:flex;flex-direction:column;gap:10px;width:100%;">
+    <button class="btn-primary" onclick="showScreen('mybookings','left')">View My Bookings &rarr;</button>
+    <button class="btn-secondary" onclick="showScreen('home','right')">Back to Home</button>
+  </div>
+</div>
+
+<!-- MY BOOKINGS -->
+<div class="scr" id="scr-mybookings">
+  <div class="app-header"><div style="width:36px;"></div><div class="hdr-title">My Bookings</div><button class="icon-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button></div>
+  <div class="booking-tabs"><div class="btab active">Upcoming (2)</div><div class="btab">Completed (8)</div><div class="btab">Cancelled</div></div>
+  <div style="flex:1;overflow-y:auto;padding-bottom:80px;padding-top:4px;">
+    <div class="booking-item" onclick="showScreen('bookingdetail','left')">
+      <div class="bi-header"><div class="bi-icon">&#x1F4F8;</div><div style="flex:1;"><div class="bi-name">Lens &amp; Light Studios</div><div class="bi-date">Nov 27, 2026 &middot; Wedding Photography</div></div><div class="bi-status confirmed">Confirmed</div></div>
+      <div class="divider" style="margin:0 14px;"></div>
+      <div class="milestone-tracker">
+        <div class="mt-title">Milestone Progress</div>
+        <div class="mt-steps">
+          <div class="mt-step done"><div class="mt-dot done">&#x2713;</div><div class="mt-lbl done">Advance<br/>Paid</div></div>
+          <div class="mt-step active"><div class="mt-dot active">2</div><div class="mt-lbl active">Event<br/>Day</div></div>
+          <div class="mt-step"><div class="mt-dot">3</div><div class="mt-lbl">Photo<br/>Delivery</div></div>
+          <div class="mt-step"><div class="mt-dot">4</div><div class="mt-lbl">Complete</div></div>
+        </div>
+      </div>
+      <div style="padding:0 14px 14px;display:flex;align-items:center;justify-content:space-between;"><div style="font-size:12px;color:var(--text3);">&#x20B9;11,250 paid &middot; &#x20B9;34,812 in escrow</div><button class="btn-sm">Track &rarr;</button></div>
+    </div>
+    <div class="booking-item">
+      <div class="bi-header"><div class="bi-icon">&#x1F338;</div><div style="flex:1;"><div class="bi-name">Bloom Decor Co.</div><div class="bi-date">Nov 27, 2026 &middot; Wedding Decor</div></div><div class="bi-status pending">Pending</div></div>
+      <div class="divider" style="margin:0 14px;"></div>
+      <div class="milestone-tracker">
+        <div class="mt-title">Milestone Progress</div>
+        <div class="mt-steps">
+          <div class="mt-step active"><div class="mt-dot active">1</div><div class="mt-lbl active">Awaiting<br/>Advance</div></div>
+          <div class="mt-step"><div class="mt-dot">2</div><div class="mt-lbl">Setup<br/>Day</div></div>
+          <div class="mt-step"><div class="mt-dot">3</div><div class="mt-lbl">Final<br/>Look</div></div>
+          <div class="mt-step"><div class="mt-dot">4</div><div class="mt-lbl">Complete</div></div>
+        </div>
+      </div>
+      <div style="padding:0 14px 14px;display:flex;align-items:center;justify-content:space-between;"><div style="font-size:12px;color:var(--text3);">&#x20B9;0 paid &middot; Pay &#x20B9;8,750 to confirm</div><button class="btn-sm" onclick="showScreen('payment','left')">Pay Now</button></div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="showScreen('home','right')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></div>
+    <div class="nav-item" onclick="showScreen('browse','left')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>Explore</span></div>
+    <div class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Bookings</span><div class="nav-badge">2</div></div>
+    <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>Saved</span></div>
+    <div class="nav-item" onclick="showScreen('profile','left')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></div>
+  </div>
+</div>
+
+<!-- BOOKING DETAIL -->
+<div class="scr" id="scr-bookingdetail">
+  <div class="app-header"><button class="back-btn" onclick="showScreen('mybookings','right')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="hdr-title">Booking Detail</div><div style="width:36px;"></div></div>
+  <div style="flex:1;overflow-y:auto;padding:16px 18px 30px;">
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px;"><div style="font-size:40px;">&#x1F4F8;</div><div><div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:800;color:var(--text);">Lens &amp; Light Studios</div><div class="badge-verified">&#x2713; Verified</div></div><div class="bi-status confirmed" style="margin-left:auto;">Confirmed</div></div>
+    <div style="background:#fff;border-radius:16px;padding:16px;border:1px solid var(--border);margin-bottom:14px;">
+      <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;">Booking Info</div>
+      <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;">
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2);">Booking ID</span><b>#UTH-20261127-4892</b></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2);">Package</span><b>Wedding Photography</b></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2);">Event Date</span><b>Nov 27, 2026</b></div>
+        <div style="display:flex;justify-content:space-between;"><span style="color:var(--text2);">Total Value</span><b style="color:var(--saffron);">&#x20B9;46,062</b></div>
+      </div>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:16px;border:1px solid var(--border);margin-bottom:14px;">
+      <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px;">Escrow Milestones</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;gap:10px;align-items:center;"><div style="width:28px;height:28px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;flex-shrink:0;">&#x2713;</div><div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--text);">Advance (25%)</div><div style="font-size:11px;color:var(--text3);">Paid &middot; Oct 15</div></div><b style="color:#10B981;">&#x20B9;11,250</b></div>
+        <div style="display:flex;gap:10px;align-items:center;"><div style="width:28px;height:28px;border-radius:50%;background:var(--saffron);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;flex-shrink:0;">2</div><div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--text);">Event Day (50%)</div><div style="font-size:11px;color:var(--text3);">Due &middot; Nov 27</div></div><b>&#x20B9;22,500</b></div>
+        <div style="display:flex;gap:10px;align-items:center;opacity:0.5;"><div style="width:28px;height:28px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--text3);flex-shrink:0;">3</div><div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--text);">Delivery (25%)</div><div style="font-size:11px;color:var(--text3);">After photo approval</div></div><b>&#x20B9;11,250</b></div>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="showScreen('payment','left')">Pay Event Day Milestone &rarr;</button>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div class="scr" id="scr-profile" style="overflow-y:auto;">
+  <div style="padding-bottom:80px;">
+    <div class="profile-hero">
+      <div class="profile-avatar">A</div>
+      <div class="profile-name">Arjun Reddy</div>
+      <div class="profile-phone">+91 98765 43210 &middot; Hyderabad</div>
+      <div class="profile-stats">
+        <div style="text-align:center;"><div class="ps-val">2</div><div class="ps-lbl">Active</div></div>
+        <div style="text-align:center;"><div class="ps-val">8</div><div class="ps-lbl">Completed</div></div>
+        <div style="text-align:center;"><div class="ps-val">&#x20B9;4.2L</div><div class="ps-lbl">Spent</div></div>
+      </div>
+    </div>
+    <div style="background:#fff;">
+      <div class="pm-section">My Activity</div>
+      <div class="pm-row" onclick="showScreen('mybookings','left')"><div class="pm-row-icon">&#x1F4C5;</div><div><div class="pm-row-text">My Bookings</div><div class="pm-row-sub">2 active &middot; 8 completed</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="pm-divider"></div>
+      <div class="pm-row"><div class="pm-row-icon">&#x2764;&#xFE0F;</div><div><div class="pm-row-text">Saved Vendors</div><div class="pm-row-sub">14 vendors</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="pm-divider"></div>
+      <div class="pm-row"><div class="pm-row-icon">&#x1F6E1;&#xFE0F;</div><div><div class="pm-row-text">Escrow Wallet</div><div class="pm-row-sub">&#x20B9;46,062 protected</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="pm-section">My Event</div>
+      <div class="pm-row"><div class="pm-row-icon">&#x1F492;</div><div><div class="pm-row-text">Wedding Planner</div><div class="pm-row-sub">Nov 27, 2026 &middot; 47 days away</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="pm-divider"></div>
+      <div class="pm-row"><div class="pm-row-icon">&#x1F4CB;</div><div><div class="pm-row-text">Checklist</div><div class="pm-row-sub">12/20 items done</div></div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="pm-section">Settings</div>
+      <div class="pm-row"><div class="pm-row-icon">&#x1F514;</div><div class="pm-row-text">Notifications</div><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+      <div class="pm-divider"></div>
+      <div class="pm-row" style="color:var(--rose);"><div class="pm-row-icon" style="background:rgba(239,68,68,0.08);">&#x1F6AA;</div><div class="pm-row-text" style="color:var(--rose);">Log Out</div></div>
+    </div>
+  </div>
+  <div class="bottom-nav" style="position:fixed;">
+    <div class="nav-item" onclick="showScreen('home','right')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span>Home</span></div>
+    <div class="nav-item" onclick="showScreen('browse','left')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>Explore</span></div>
+    <div class="nav-item" onclick="showScreen('mybookings','left')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span>Bookings</span></div>
+    <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg><span>Saved</span></div>
+    <div class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Profile</span></div>
+  </div>
+</div>
+
+<!-- NOTIFICATIONS -->
+<div class="scr" id="scr-notifications">
+  <div class="app-header"><button class="back-btn" onclick="showScreen('home','right')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button><div class="hdr-title">Notifications</div><div style="font-size:12px;color:var(--saffron);font-weight:700;cursor:pointer;">Mark all read</div></div>
+  <div style="flex:1;overflow-y:auto;padding-bottom:20px;">
+    <div style="padding:8px 18px 4px;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;">Today</div>
+    <div style="display:flex;gap:10px;padding:12px 18px;background:rgba(230,81,0,0.04);border-left:3px solid var(--saffron);"><div style="font-size:28px;">&#x1F6E1;&#xFE0F;</div><div><div style="font-size:13px;font-weight:700;color:var(--text);">Escrow Payment Confirmed</div><div style="font-size:12px;color:var(--text2);margin:2px 0;">&#x20B9;11,250 held securely for Lens &amp; Light Studios booking</div><div style="font-size:11px;color:var(--text3);">2 mins ago</div></div></div>
+    <div style="display:flex;gap:10px;padding:12px 18px;background:rgba(16,185,129,0.04);border-left:3px solid #10B981;"><div style="font-size:28px;">&#x2705;</div><div><div style="font-size:13px;font-weight:700;color:var(--text);">Booking Confirmed!</div><div style="font-size:12px;color:var(--text2);margin:2px 0;">Lens &amp; Light Studios accepted your booking for Nov 27</div><div style="font-size:11px;color:var(--text3);">5 mins ago</div></div></div>
+    <div style="padding:8px 18px 4px;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;margin-top:8px;">Yesterday</div>
+    <div style="display:flex;gap:10px;padding:12px 18px;"><div style="font-size:28px;">&#x1F4F8;</div><div><div style="font-size:13px;font-weight:700;color:var(--text);">New Review Posted</div><div style="font-size:12px;color:var(--text2);margin:2px 0;">Your review for Royal Feasts Catering is live</div><div style="font-size:11px;color:var(--text3);">Yesterday &middot; 3:22 PM</div></div></div>
+    <div style="display:flex;gap:10px;padding:12px 18px;"><div style="font-size:28px;">&#x1F4A1;</div><div><div style="font-size:13px;font-weight:700;color:var(--text);">Reminder: 47 days to your wedding!</div><div style="font-size:12px;color:var(--text2);margin:2px 0;">You still need to book: Catering, Makeup, Mehendi</div><div style="font-size:11px;color:var(--text3);">Yesterday &middot; 9:00 AM</div></div></div>
+  </div>
+</div>
+
+  </div><!-- /phone-screen -->
+</div><!-- /phone-wrap -->
+
+<div class="screen-info" id="screenInfo">
+  <div class="si-dot"></div>
+  <div><div class="si-label">Current Screen</div><div class="si-val" id="screenInfoText">Splash &mdash; UTSAV branding intro</div></div>
+</div>
+</div><!-- /stage -->
+
+<script>
+let currentScreen='splash',onboardSlide=0;
+const SCREEN_INFO={'splash':'Splash \u2014 Animated app launch screen','onboard':'Onboarding \u2014 Value proposition walkthrough','auth':'Auth \u2014 Phone OTP login flow','home':'Home \u2014 Personalised event dashboard','browse':'Browse \u2014 Vendor discovery with filters','vendor':'Vendor Detail \u2014 Portfolio, services & reviews','booking':'Booking Flow \u2014 Multi-step service & date selection','payment':'Milestone Escrow \u2014 Secure payment breakdown','success':'Success \u2014 Booking confirmed + escrow activated','mybookings':'My Bookings \u2014 Active bookings + milestone tracker','bookingdetail':'Booking Detail \u2014 Full escrow timeline view','profile':'Profile \u2014 User account & event planner','notifications':'Notifications \u2014 Real-time booking alerts'};
+const FLOW_MAP={0:'browse',1:'booking',2:'payment',3:'mybookings'};
+function showScreen(name,direction){
+  const prev=document.getElementById('scr-'+currentScreen);
+  const next=document.getElementById('scr-'+name);
+  if(!next||currentScreen===name)return;
+  if(prev){prev.classList.remove('active','anim-left','anim-right','anim-up','anim-scale');prev.style.display='none';}
+  next.style.display='flex';next.classList.add('active');
+  const ac=direction==='left'?'anim-left':direction==='right'?'anim-right':direction==='up'?'anim-up':'anim-scale';
+  next.classList.add(ac);setTimeout(()=>next.classList.remove(ac),400);
+  currentScreen=name;
+  const darkS=['splash','onboard','auth'];
+  const sb=document.getElementById('statusBar');const hi=document.getElementById('homeInd');
+  if(darkS.includes(name)){sb.classList.add('dark');hi.classList.add('light');}else{sb.classList.remove('dark');hi.classList.remove('light');}
+  const info=document.getElementById('screenInfoText');if(info)info.textContent=SCREEN_INFO[name]||name;
+  ['browse','booking','payment','mybookings'].forEach((s,i)=>{const el=document.getElementById('fg-'+i);if(el)el.classList.toggle('active',name===s);});
+}
+function goFlow(i){showScreen(FLOW_MAP[i],i>=Object.values(FLOW_MAP).indexOf(currentScreen)?'left':'right');}
+function initParticles(){const pc=document.getElementById('splashParticles');for(let i=0;i<25;i++){const p=document.createElement('div');p.className='sp';const s=1+Math.random()*3;p.style.cssText=`left:${Math.random()*100}%;bottom:-10px;width:${s}px;height:${s}px;animation-duration:${12+Math.random()*20}s;animation-delay:${Math.random()*15}s;opacity:${.08+Math.random()*.2}`;pc.appendChild(p);}}
+function updateClock(){const now=new Date();let h=now.getHours(),m=now.getMinutes();document.getElementById('statusTime').textContent=`${h}:${m.toString().padStart(2,'0')}`;}
+updateClock();setInterval(updateClock,30000);
+setTimeout(()=>showScreen('onboard','left'),2400);
+const SLIDES=[{e:'&#x1F492;',l:'&#x2736; Discovery',t:'Find Verified Vendors for Every Celebration',d:'Browse 500+ verified photographers, caterers, venues & decorators \u2014 all rated, reviewed & background-checked.'},{e:'&#x1F4C5;',l:'&#x2736; Easy Booking',t:'Book in 3 Taps. Choose Date, Package, Done.',d:'Select your service, pick a date on the live calendar, and lock your slot. The vendor is notified instantly.'},{e:'&#x1F6E1;&#xFE0F;',l:'&#x2736; Escrow Safety',t:'Pay via Milestones \u2014 Money Released Only on Delivery',d:'UTSAV holds your payment in secure escrow and releases it to the vendor only when each milestone is delivered.'}];
+function nextOnboard(){onboardSlide++;if(onboardSlide>=SLIDES.length){showScreen('auth','left');return;}const s=SLIDES[onboardSlide];document.getElementById('onboardEmoji').innerHTML=s.e;document.getElementById('onboardLabel').innerHTML=s.l;document.getElementById('onboardTitle').textContent=s.t;document.getElementById('onboardDesc').textContent=s.d;for(let i=0;i<3;i++)document.getElementById('od-'+i).classList.toggle('active',i===onboardSlide);if(onboardSlide===SLIDES.length-1)document.getElementById('onboardNext').textContent='Get Started \u2192';}
+function showOtp(){document.getElementById('auth-step-1').classList.remove('show');document.getElementById('auth-step-2').classList.add('show');const digits=['4','8','9','2'];let i=0;const f=setInterval(()=>{if(i>=4){clearInterval(f);return;}const b=document.getElementById('otp-'+i);b.textContent=digits[i];b.classList.add('filled');i++;},250);}
+function backToPhone(){document.getElementById('auth-step-2').classList.remove('show');document.getElementById('auth-step-1').classList.add('show');for(let i=0;i<4;i++){const b=document.getElementById('otp-'+i);b.textContent='\u2014';b.classList.remove('filled');}}
+function verifyOtp(){showScreen('home','left');}
+function resendOtp(){for(let i=0;i<4;i++){const b=document.getElementById('otp-'+i);b.textContent='\u2014';b.classList.remove('filled');}setTimeout(showOtp,300);}
+function selectPkg(i){[0,1,2].forEach(j=>{const c=document.getElementById('pkg-'+j);const r=document.getElementById('pkg-radio-'+j);if(j===i){c.style.borderColor='var(--saffron)';r.style.cssText='width:20px;height:20px;border-radius:50%;background:var(--saffron);display:flex;align-items:center;justify-content:center;';r.innerHTML='<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';}else{c.style.borderColor='var(--border)';r.style.cssText='width:20px;height:20px;border-radius:50%;border:2px solid var(--border);';r.innerHTML='';}});}
+function nextBookingStep(step){[1,2,3].forEach(s=>{document.getElementById('booking-step-'+s).classList.remove('show');const c=document.getElementById('bp-'+s);const l=document.getElementById('bpl-'+s);c.classList.remove('active','done');l.classList.remove('active');if(s<step){c.classList.add('done');c.textContent='\u2713';}else if(s===step){c.classList.add('active');c.textContent=s;l.classList.add('active');}else{c.textContent=s;}if(s<step&&document.getElementById('bpline-'+s))document.getElementById('bpline-'+s).classList.add('done');else if(document.getElementById('bpline-'+s))document.getElementById('bpline-'+s).classList.remove('done');});document.getElementById('booking-step-'+step).classList.add('show');}
+function buildCalendar(){const grid=document.getElementById('calGrid');if(!grid)return;const days=[null,null,null,null,null,null,null,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,null,null,null,null,null,null];grid.innerHTML='';days.forEach(d=>{const el=document.createElement('div');el.className='cal-day';if(!d)el.classList.add('empty');else{el.textContent=d;if(d<=10)el.classList.add('disabled');else if(d===27)el.classList.add('selected');else if(d===11)el.classList.add('today');else el.onclick=()=>{document.querySelectorAll('.cal-day.selected').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');};}grid.appendChild(el);});}
+buildCalendar();
+function selectPM(id){['upi','card','net'].forEach(m=>{document.getElementById('pm-'+m).classList.toggle('selected',m===id);const r=document.getElementById('pmr-'+m);if(m===id)r.classList.add('on');else r.classList.remove('on');});}
+function processPayment(){const btn=document.querySelector('#scr-payment .btn-primary');btn.textContent='\u23F3 Processing\u2026';btn.disabled=true;setTimeout(()=>{btn.textContent='\uD83D\uDD12 Pay \u20B911,250 Securely';btn.disabled=false;showScreen('success','left');},1800);}
+initParticles();
+nextBookingStep(1);
+</script>
+</body>
+</html>
